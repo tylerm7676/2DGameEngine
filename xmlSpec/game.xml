@@ -5,11 +5,11 @@
 <frameCapOn>true</frameCapOn>
 <period>17</period>
 
-<numZombies>100</numZombies>
-<numLives>11</numLives>
-<wave1>15</wave1>
-<wave2>20</wave2>
-<wave3>25</wave3>
+<numZombiesLives>3</numZombiesLives>
+<numLives>20</numLives>
+<wave1>5</wave1>
+<wave2>10</wave2>
+<wave3>15</wave3>
 <wave4>30</wave4>
 <wave5>35</wave5>
 <wave6>40</wave6>

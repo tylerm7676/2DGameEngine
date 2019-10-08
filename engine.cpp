@@ -235,15 +235,21 @@ void Engine::checkForCollisions()
     {
       player->loseLife();
       healthBar.setCurrentLength(healthBar.getCurrentLength() -
-        (1.0 / player->getInitNumLives()));
+        (1.0 / player->getNumLives()));
       player->setCollided(false);
     }
     if((*it)->hasCollided() && (!((*it)->isColliding())))
     {
-      SmartSprite* deadSmartSprite = *it;
-      player->detach(deadSmartSprite);
-      it = smartSprites.erase(it);
-      delete deadSmartSprite;
+      SmartSprite* hitSmartSprite = *it;
+      hitSmartSprite->loseLife();
+      hitSmartSprite->setCollided(false);
+      hitSmartSprite->randomizeVelocity();
+      if(hitSmartSprite->getNumLives() <= 0)
+      {
+        player->detach(hitSmartSprite);
+        it = smartSprites.erase(it);
+        delete hitSmartSprite;
+      }
     }
     else
       ++it;

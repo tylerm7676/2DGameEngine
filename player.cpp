@@ -110,7 +110,7 @@ Player::Player(const std::string& name) :
   projectileName(GameData::getInstance().getXmlStr(name+"/projectileName")),
   activeProjectiles(),
   freeProjectiles(),
-  initNumLives(GameData::getInstance().getXmlInt("numLives")),
+  numLives(GameData::getInstance().getXmlInt("numLives")),
   livesLeft(GameData::getInstance().getXmlInt("numLives")),
   godMode(false),
   minSpeed(GameData::getInstance().getXmlInt(projectileName+"/minSpeed")),

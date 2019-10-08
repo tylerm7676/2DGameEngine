@@ -52,6 +52,8 @@ SmartSprite::SmartSprite(const std::string& name, const Player* p) :
   colliding(false),
   explosion(nullptr),
   explosionStartTime(-1),
+  numLives(GameData::getInstance().getXmlInt("numZombiesLives")),
+  livesLeft(GameData::getInstance().getXmlInt("numZombiesLives")),
   sound() {}
 
 void SmartSprite::randomizeVelocity()
@@ -127,10 +129,10 @@ void SmartSprite::draw() const
 
 void SmartSprite::update(Uint32 ticks)
 {
-  if(colliding)
+  if(collided && colliding)
   {
     explosion->update(ticks);
-    if((Clock::getInstance().getSeconds() - explosionStartTime) >= 0.75)
+    if((Clock::getInstance().getSeconds() - explosionStartTime) >= 0.001)
     {
       colliding = false;
       delete explosion;
@@ -188,7 +190,5 @@ void SmartSprite::collide()
   explosion->setPosition(getPosition());
   explosion->setVelocityX(0);
   explosion->setVelocityY(0);
-  setPosition(Vector2f(-100, -100));
-  setVelocity(Vector2f(0, 0));
   explosionStartTime = Clock::getInstance().getSeconds();
 }

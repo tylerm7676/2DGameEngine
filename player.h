@@ -23,7 +23,7 @@ class Player : public Drawable
     std::string projectileName;
     std::list<Projectile*> activeProjectiles;
     std::list<Projectile*> freeProjectiles;
-    unsigned int initNumLives;
+    unsigned int numLives;
     unsigned int livesLeft;
     bool godMode;
     float minSpeed;
@@ -77,7 +77,7 @@ class Player : public Drawable
     std::list<Projectile*> getActiveProjectiles() const { return activeProjectiles; }
     std::list<Projectile*> getFreeProjectiles() const { return freeProjectiles; }
     unsigned int getLivesLeft() const { return livesLeft; }
-    unsigned int getInitNumLives() const { return initNumLives; }
+    unsigned int getNumLives() const { return numLives; }
     bool hasCollided() const { return collided; }
     bool isColliding() const { return colliding; }
     void setCollided(bool b) { collided = b; }

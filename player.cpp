@@ -136,6 +136,8 @@ Player::Player(const std::string& name) :
   pistolIsReloading(false),
   shotgunIsReloading(false),
   assaultRifleIsReloading(false),
+  money(0),
+  points(0),
   sound()
   {
     setVelocityX(0);
@@ -267,10 +269,13 @@ void Player::detach(SmartSprite* o)
     if (*ptr == o)
     {
       ptr = observers.erase(ptr);
+      money += 10;
+      points += 10;
       return;
     }
     ++ptr;
   }
+
 }
 
 void Player::shoot()

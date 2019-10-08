@@ -14,12 +14,11 @@ MenuEngine::MenuEngine() :
   renderer( RenderContext::getInstance().getRenderer() ),
   menu( renderer ),
   optionChoice(-1),
-  starsOption(false),
-  numZombies(0) {}
+  starsOption(false) {}
 
-void MenuEngine::draw() const
+void MenuEngine::draw(int wave) const
 {
-  menu.draw();
+  menu.draw(wave);
   SDL_RenderPresent(renderer);
 }
 
@@ -35,7 +34,7 @@ bool MenuEngine::starsOptionChosen()
 
 void MenuEngine::update(Uint32) {}
 
-void MenuEngine::play()
+void MenuEngine::play(int wave)
 {
   SDL_Event event;
   const Uint8* keystate;
@@ -49,7 +48,7 @@ void MenuEngine::play()
       if(event.type ==  SDL_QUIT) { done = true; break; }
       if(event.type == SDL_KEYDOWN)
       {
-        if(keystate[SDL_SCANCODE_ESCAPE] || keystate[SDL_SCANCODE_Q])
+        if(keystate[SDL_SCANCODE_ESCAPE])
         {
           done = true;
           break;
@@ -64,7 +63,6 @@ void MenuEngine::play()
           if(optionChoice == 1)
           {
             starsOption = true;
-            numZombies = menu.getNumZombies();
           }
         }
       }
@@ -73,6 +71,6 @@ void MenuEngine::play()
         menu.lightOff();
     }
     // In this section of the event loop we allow key bounce:
-    draw();
+    draw(wave);
   }
 }

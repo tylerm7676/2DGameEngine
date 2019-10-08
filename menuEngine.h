@@ -10,9 +10,8 @@ class MenuEngine
     Menu menu;
     int optionChoice;
     bool starsOption;
-    int numZombies;
 
-    void draw() const;
+    void draw(int) const;
     void update(Uint32);
 
   public:
@@ -20,8 +19,7 @@ class MenuEngine
     ~MenuEngine();
     MenuEngine(const MenuEngine&) = delete;
     MenuEngine& operator=(const MenuEngine&) = delete;
-    void play();
+    void play(int);
     int getOptionChoice() const { return optionChoice; }
     bool starsOptionChosen();
-    int getNumZombies() const { return menu.getNumZombies(); }
 };

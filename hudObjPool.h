@@ -22,5 +22,5 @@ class HudObjPool
     static HudObjPool& getInstance();
     bool isVisible() const { return visible; }
     void setVisibility(bool v) { visible = v; }
-    void draw(int, int, int, int);
+    void draw(int, int, int, int, int, int);
 };

@@ -151,10 +151,15 @@ int Menu::getNumZombies() const {
   return numZombies;
 }
 
-void Menu::draw() const
+void Menu::draw(int wave) const
 {
   drawBackground();
-  io.writeText("Zombies Menu", hudFrame.x + 250, hudFrame.y + 150, true);
+  if(wave == 0)
+  {
+    io.writeText("Zombies Menu", hudFrame.x + 250, hudFrame.y + 150, true);
+  }
+  else
+    io.writeText("Wave " + std::to_string(wave), hudFrame.x + 425, hudFrame.y + 150, true);
   int space = spaces;
   for(const std::string& option : options)
   {

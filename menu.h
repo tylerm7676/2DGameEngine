@@ -33,7 +33,7 @@ class Menu
     Menu(SDL_Renderer*);
     Menu(const Menu&) = delete;
     Menu& operator=(const Menu&) = delete;
-    void draw() const;
+    void draw(int) const;
     void update();
     void incrIcon();
     void decrIcon();

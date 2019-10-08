@@ -49,6 +49,8 @@ class Player : public Drawable
     bool pistolIsReloading;
     bool shotgunIsReloading;
     bool assaultRifleIsReloading;
+    int money;
+    int points;
     Sound sound;
 
     void advanceFrame(Uint32 ticks);
@@ -89,4 +91,6 @@ class Player : public Drawable
     void setReload();
     int getBulletsRemain();
     int getBulletsClip();
+    int getMoney() { return money; }
+    int getPoints() { return points; }
 };

@@ -36,7 +36,7 @@ Engine::Engine() :
   collisionStrategy(new PerPixelCollisionStrategy),
   menuEngine(),
   numZombies(GameData::getInstance().getXmlInt("wave1") + GameData::getInstance().getXmlInt("wave2") + GameData::getInstance().getXmlInt("wave3")),
-  waveNum(1),
+  waveNum(0),
   wave1(GameData::getInstance().getXmlInt("wave1")),
   wave2(GameData::getInstance().getXmlInt("wave2")),
   wave3(GameData::getInstance().getXmlInt("wave3")),
@@ -49,7 +49,8 @@ Engine::Engine() :
   wave10(GameData::getInstance().getXmlInt("wave10"))
   //lights()
   {
-    menuEngine.play();
+    menuEngine.play(waveNum);
+    waveNum++;
     smartSprites.reserve(numZombies);
     for(int i = 0; i < wave1; i++)
     {
@@ -71,7 +72,8 @@ void Engine::draw()
   //lights.draw();
   viewport.draw();
   hudMain.draw();
-  hudObjPool.draw(smartSprites.size(), waveNum, player->getBulletsRemain(), player->getBulletsClip());
+  hudObjPool.draw(smartSprites.size(), waveNum, player->getBulletsRemain(),
+    player->getBulletsClip(), player->getMoney(), player->getPoints());
   healthBar.draw(player->getWeapon());
   if(player->getLivesLeft() <= 0)
   {
@@ -84,6 +86,7 @@ void Engine::draw()
   else if(smartSprites.size() <= 0 && waveNum == 1)
   {
     waveNum++;
+    menuEngine.play(waveNum);
     for(int i = 0; i < wave2; i++)
     {
       smartSprites.push_back(new SmartSprite("Zombie", player));
@@ -95,6 +98,7 @@ void Engine::draw()
   else if(smartSprites.size() <= 0 && waveNum == 2)
   {
     waveNum++;
+    menuEngine.play(waveNum);
     for(int i = 0; i < wave3; i++)
     {
       smartSprites.push_back(new SmartSprite("Zombie", player));
@@ -106,6 +110,7 @@ void Engine::draw()
   else if(smartSprites.size() <= 0 && waveNum == 3)
   {
     waveNum++;
+    menuEngine.play(waveNum);
     for(int i = 0; i < wave4; i++)
     {
       smartSprites.push_back(new SmartSprite("Zombie", player));
@@ -117,6 +122,7 @@ void Engine::draw()
   else if(smartSprites.size() <= 0 && waveNum == 4)
   {
     waveNum++;
+    menuEngine.play(waveNum);
     for(int i = 0; i < wave5; i++)
     {
       smartSprites.push_back(new SmartSprite("Zombie", player));
@@ -128,6 +134,7 @@ void Engine::draw()
   else if(smartSprites.size() <= 0 && waveNum == 5)
   {
     waveNum++;
+    menuEngine.play(waveNum);
     for(int i = 0; i < wave6; i++)
     {
       smartSprites.push_back(new SmartSprite("Zombie", player));
@@ -139,6 +146,7 @@ void Engine::draw()
   else if(smartSprites.size() <= 0 && waveNum == 6)
   {
     waveNum++;
+    menuEngine.play(waveNum);
     for(int i = 0; i < wave7; i++)
     {
       smartSprites.push_back(new SmartSprite("Zombie", player));
@@ -150,6 +158,7 @@ void Engine::draw()
   else if(smartSprites.size() <= 0 && waveNum == 7)
   {
     waveNum++;
+    menuEngine.play(waveNum);
     for(int i = 0; i < wave8; i++)
     {
       smartSprites.push_back(new SmartSprite("Zombie", player));
@@ -161,6 +170,7 @@ void Engine::draw()
   else if(smartSprites.size() <= 0 && waveNum == 8)
   {
     waveNum++;
+    menuEngine.play(waveNum);
     for(int i = 0; i < wave9; i++)
     {
       smartSprites.push_back(new SmartSprite("Zombie", player));
@@ -172,6 +182,7 @@ void Engine::draw()
   else if(smartSprites.size() <= 0 && waveNum == 9)
   {
     waveNum++;
+    menuEngine.play(waveNum);
     for(int i = 0; i < wave10; i++)
     {
       smartSprites.push_back(new SmartSprite("Zombie", player));

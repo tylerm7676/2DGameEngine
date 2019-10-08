@@ -29,7 +29,8 @@ HudObjPool::HudObjPool() :
     (Uint8)GameData::getInstance().getXmlInt("hudObjPool/outlineColor/b"),
     (Uint8)GameData::getInstance().getXmlInt("hudObjPool/outlineColor/a")}) {}
 
-void HudObjPool::draw(int numZombiesLeft, int wave, int bulletsRemain, int bulletsClip)
+void HudObjPool::draw(int numZombiesLeft, int wave, int bulletsRemain,
+  int bulletsClip, int money, int points)
 {
   if (isVisible())
   {
@@ -54,6 +55,8 @@ void HudObjPool::draw(int numZombiesLeft, int wave, int bulletsRemain, int bulle
     textToWrite += "\n Zombies Remaining: " + std::to_string(numZombiesLeft);
     textToWrite += "\n " + std::to_string(bulletsRemain) + " / ";
     textToWrite += std::to_string(bulletsClip);
+    textToWrite += "\n Money: " + std::to_string(money);
+    textToWrite += "\n Points: " + std::to_string(points);
 
     IoMod::getInstance().writeTextWrapped(textToWrite, pos[0]+5, pos[1]+5,
       width);

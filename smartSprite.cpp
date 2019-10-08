@@ -88,6 +88,30 @@ void SmartSprite::randomizePosition()
   if(randomPos == 4)
   {
     setPosition(Vector2f(960, 1380));
+    randomPos++;
+    return;
+  }
+  if(randomPos == 5)
+  {
+    setPosition(Vector2f(-300, -300));
+    randomPos++;
+    return;
+  }
+  if(randomPos == 6)
+  {
+    setPosition(Vector2f(2220, -300));
+    randomPos++;
+    return;
+  }
+  if(randomPos == 7)
+  {
+    setPosition(Vector2f(2220, 1380));
+    randomPos++;
+    return;
+  }
+  if(randomPos == 8)
+  {
+    setPosition(Vector2f(-300, 1380));
     randomPos = 1;
     return;
   }

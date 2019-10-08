@@ -55,7 +55,7 @@ void HudMain::draw()
     textToWrite += "\nP to pause";
     textToWrite += "\nF1 to toggle HUDs";
     textToWrite += "\nM to toggle music";
-    textToWrite += "\nR to Restart";
+    textToWrite += "\nR to Reload";
     textToWrite += "\nG to toggle God Mode";
 
     IoMod::getInstance().writeTextWrapped(textToWrite, pos[0]+5, pos[1]+5, width);

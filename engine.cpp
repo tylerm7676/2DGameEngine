@@ -50,7 +50,6 @@ Engine::Engine() :
   //lights()
   {
     menuEngine.play();
-    //numZombies = GameData::getInstance().getXmlInt("wave1");
     smartSprites.reserve(numZombies);
     for(int i = 0; i < wave1; i++)
     {
@@ -72,7 +71,7 @@ void Engine::draw()
   //lights.draw();
   viewport.draw();
   hudMain.draw();
-  hudObjPool.draw(smartSprites.size(), waveNum);
+  hudObjPool.draw(smartSprites.size(), waveNum, player->getBulletsRemain(), player->getBulletsClip());
   healthBar.draw(player->getWeapon());
   if(player->getLivesLeft() <= 0)
   {
@@ -82,7 +81,7 @@ void Engine::draw()
     gameOver.setVisibility(true);
     gameOver.draw(false);
   }
-  else if(smartSprites.size() <= 0 && waveNum== 1)
+  else if(smartSprites.size() <= 0 && waveNum == 1)
   {
     waveNum++;
     for(int i = 0; i < wave2; i++)
@@ -93,7 +92,7 @@ void Engine::draw()
       player->attach(smartSprites[i]);
     }
   }
-  else if(smartSprites.size() <= 0 && waveNum== 2)
+  else if(smartSprites.size() <= 0 && waveNum == 2)
   {
     waveNum++;
     for(int i = 0; i < wave3; i++)
@@ -104,7 +103,7 @@ void Engine::draw()
       player->attach(smartSprites[i]);
     }
   }
-  else if(smartSprites.size() <= 0 && waveNum== 3)
+  else if(smartSprites.size() <= 0 && waveNum == 3)
   {
     waveNum++;
     for(int i = 0; i < wave4; i++)
@@ -115,7 +114,7 @@ void Engine::draw()
       player->attach(smartSprites[i]);
     }
   }
-  else if(smartSprites.size() <= 0 && waveNum== 4)
+  else if(smartSprites.size() <= 0 && waveNum == 4)
   {
     waveNum++;
     for(int i = 0; i < wave5; i++)
@@ -126,7 +125,7 @@ void Engine::draw()
       player->attach(smartSprites[i]);
     }
   }
-  else if(smartSprites.size() <= 0 && waveNum== 5)
+  else if(smartSprites.size() <= 0 && waveNum == 5)
   {
     waveNum++;
     for(int i = 0; i < wave6; i++)
@@ -137,7 +136,7 @@ void Engine::draw()
       player->attach(smartSprites[i]);
     }
   }
-  else if(smartSprites.size() <= 0 && waveNum== 6)
+  else if(smartSprites.size() <= 0 && waveNum == 6)
   {
     waveNum++;
     for(int i = 0; i < wave7; i++)
@@ -148,7 +147,7 @@ void Engine::draw()
       player->attach(smartSprites[i]);
     }
   }
-  else if(smartSprites.size() <= 0 && waveNum== 7)
+  else if(smartSprites.size() <= 0 && waveNum == 7)
   {
     waveNum++;
     for(int i = 0; i < wave8; i++)
@@ -159,7 +158,7 @@ void Engine::draw()
       player->attach(smartSprites[i]);
     }
   }
-  else if(smartSprites.size() <= 0 && waveNum== 8)
+  else if(smartSprites.size() <= 0 && waveNum == 8)
   {
     waveNum++;
     for(int i = 0; i < wave9; i++)
@@ -170,7 +169,7 @@ void Engine::draw()
       player->attach(smartSprites[i]);
     }
   }
-  else if(smartSprites.size() <= 0 && waveNum== 9)
+  else if(smartSprites.size() <= 0 && waveNum == 9)
   {
     waveNum++;
     for(int i = 0; i < wave10; i++)
@@ -181,7 +180,7 @@ void Engine::draw()
       player->attach(smartSprites[i]);
     }
   }
-  else if(smartSprites.size() <= 0 && waveNum== 10)
+  else if(smartSprites.size() <= 0 && waveNum == 10)
   {
     hudMain.setVisibility(false);
     healthBar.setVisibility(false);
@@ -278,11 +277,15 @@ bool Engine::play()
         }
         if(keystate[SDL_SCANCODE_SPACE])
           player->shoot();
-        if(keystate[SDL_SCANCODE_Q] || keystate[SDL_SCANCODE_E])
-          player->switchWeapons();
+        if(keystate[SDL_SCANCODE_Q])
+          player->cycleLeft();
+        if(keystate[SDL_SCANCODE_E])
+          player->cycleRight();
+        if(keystate[SDL_SCANCODE_R])
+          player->setReload();
         if(keystate[SDL_SCANCODE_M])
           sound.toggleMusic();
-        if(keystate[SDL_SCANCODE_R])
+        if(keystate[SDL_SCANCODE_X])
         {
           healthBar.reset();
           healthBar.setVisibility(false);

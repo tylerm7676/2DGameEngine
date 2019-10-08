@@ -27,10 +27,28 @@ class Player : public Drawable
     unsigned int livesLeft;
     bool godMode;
     float minSpeed;
-    float shotgunInterval;
     float pistolInterval;
+    float shotgunInterval;
+    float assaultRifleInterval;
+    float pistolReloadInterval;
+    float shotgunReloadInterval;
+    float assaultRifleReloadInterval;
     float timeSinceLastShot;
+    float timeSinceLastPistolReload;
+    float timeSinceLastShotgunReload;
+    float timeSinceLastAssaultRifleReload;
+    bool pistol;
     bool shotgun;
+    bool assaultRifle;
+    int pistolBulletsRemain;
+    int pistolClip;
+    int shotgunBulletsRemain;
+    int shotgunClip;
+    int assaultRifleBulletsRemain;
+    int assaultRifleClip;
+    bool pistolIsReloading;
+    bool shotgunIsReloading;
+    bool assaultRifleIsReloading;
     Sound sound;
 
     void advanceFrame(Uint32 ticks);
@@ -64,6 +82,11 @@ class Player : public Drawable
     void loseLife() { --livesLeft; }
     bool isGodMode() const { return godMode; }
     void toggleGodMode() { godMode = !godMode; }
-    void switchWeapons() { shotgun = !shotgun; }
-    bool getWeapon() { return shotgun; }
+    void cycleLeft();
+    void cycleRight();
+    std::string getWeapon();
+    void reload();
+    void setReload();
+    int getBulletsRemain();
+    int getBulletsClip();
 };

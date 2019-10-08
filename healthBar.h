@@ -24,7 +24,7 @@ class HealthBar
     static HealthBar& getInstance();
     bool isVisible() const { return visible; }
     void setVisibility(bool v) { visible = v; }
-    void draw(bool) const;
+    void draw(std::string) const;
     void reset() { currentLength = 1; }
     void setCurrentLength(float l) { currentLength = l; }
     float getCurrentLength() const { return currentLength; }

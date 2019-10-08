@@ -41,7 +41,7 @@ HealthBar::HealthBar() :
     (Uint8)GameData::getInstance().getXmlInt("hudMain/outlineColor/a")}),
   currentLength(1.0) {}
 
-void HealthBar::draw(bool shotgun) const
+void HealthBar::draw(std::string weapon) const
 {
   if(isVisible())
   {
@@ -78,10 +78,12 @@ void HealthBar::draw(bool shotgun) const
     textToWrite += "Health";
     textToWrite += "\n\n\n                                ";
     textToWrite += "Q or E to cycle weapons: ";
-    if(shotgun)
-      textToWrite += "Shotgun";
-    else
+    if(weapon == "pistol")
       textToWrite += "Pistol";
+    else if(weapon == "shotgun")
+      textToWrite += "Shotgun";
+    else if(weapon == "assaultRifle")
+      textToWrite += "Assault Rifle";
     IoMod::getInstance().writeTextWrapped(textToWrite, pos[0]+5, pos[1]+10, width);
   }
 }

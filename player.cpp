@@ -8,6 +8,24 @@ void Player::advanceFrame(Uint32 ticks)
 {
   timeSinceLastFrame += ticks;
   timeSinceLastShot += ticks;
+  if(pistolIsReloading)
+  {
+    timeSinceLastPistolReload += ticks;
+    if(timeSinceLastPistolReload > pistolReloadInterval)
+      reload();
+  }
+  if(shotgunIsReloading)
+  {
+    timeSinceLastShotgunReload += ticks;
+    if(timeSinceLastShotgunReload > shotgunReloadInterval)
+      reload();
+  }
+  if(assaultRifleIsReloading)
+  {
+    timeSinceLastAssaultRifleReload += ticks;
+    if(timeSinceLastAssaultRifleReload > assaultRifleReloadInterval)
+      reload();
+  }
   if(timeSinceLastFrame > frameInterval)
   {
     if(isTwoWay())
@@ -37,6 +55,47 @@ void Player::advanceFrame(Uint32 ticks)
     setVelocityX(0);
 }
 
+void Player::reload()
+{
+  if(pistol)
+  {
+    pistolBulletsRemain = pistolClip;
+    timeSinceLastPistolReload = 0;
+    pistolIsReloading = false;
+    return;
+  }
+  if(shotgun)
+  {
+    shotgunBulletsRemain = shotgunClip;
+    timeSinceLastShotgunReload = 0;
+    shotgunIsReloading = false;
+    return;
+  }
+  if(assaultRifle)
+  {
+    assaultRifleBulletsRemain = assaultRifleClip;
+    timeSinceLastAssaultRifleReload = 0;
+    assaultRifleIsReloading = false;
+    return;
+  }
+}
+
+void Player::setReload()
+{
+  if(pistol && !pistolIsReloading && pistolBulletsRemain < pistolClip)
+  {
+    pistolIsReloading = true;
+  }
+  if(shotgun && !shotgunIsReloading && shotgunBulletsRemain < shotgunClip)
+  {
+    shotgunIsReloading = true;
+  }
+  if(assaultRifle && !assaultRifleIsReloading && assaultRifleBulletsRemain < assaultRifleClip)
+  {
+    assaultRifleIsReloading = true;
+  }
+}
+
 Player::Player(const std::string& name) :
   Drawable(name),
   facing(RIGHT),
@@ -55,10 +114,28 @@ Player::Player(const std::string& name) :
   livesLeft(GameData::getInstance().getXmlInt("numLives")),
   godMode(false),
   minSpeed(GameData::getInstance().getXmlInt(projectileName+"/minSpeed")),
-  shotgunInterval(GameData::getInstance().getXmlInt(projectileName+"/shotgunInterval")),
   pistolInterval(GameData::getInstance().getXmlInt(projectileName+"/pistolInterval")),
+  shotgunInterval(GameData::getInstance().getXmlInt(projectileName+"/shotgunInterval")),
+  assaultRifleInterval(GameData::getInstance().getXmlInt(projectileName+"/assaultRifleInterval")),
+  pistolReloadInterval(GameData::getInstance().getXmlInt(projectileName+"/pistolReloadInterval")),
+  shotgunReloadInterval(GameData::getInstance().getXmlInt(projectileName+"/shotgunReloadInterval")),
+  assaultRifleReloadInterval(GameData::getInstance().getXmlInt(projectileName+"/assaultRifleReloadInterval")),
   timeSinceLastShot(0),
+  timeSinceLastPistolReload(0),
+  timeSinceLastShotgunReload(0),
+  timeSinceLastAssaultRifleReload(0),
+  pistol(true),
   shotgun(false),
+  assaultRifle(false),
+  pistolBulletsRemain(GameData::getInstance().getXmlInt(projectileName+"/pistolClip")),
+  pistolClip(GameData::getInstance().getXmlInt(projectileName+"/pistolClip")),
+  shotgunBulletsRemain(GameData::getInstance().getXmlInt(projectileName+"/shotgunClip")),
+  shotgunClip(GameData::getInstance().getXmlInt(projectileName+"/shotgunClip")),
+  assaultRifleBulletsRemain(GameData::getInstance().getXmlInt(projectileName+"/assaultRifleClip")),
+  assaultRifleClip(GameData::getInstance().getXmlInt(projectileName+"/assaultRifleClip")),
+  pistolIsReloading(false),
+  shotgunIsReloading(false),
+  assaultRifleIsReloading(false),
   sound()
   {
     setVelocityX(0);
@@ -198,11 +275,19 @@ void Player::detach(SmartSprite* o)
 
 void Player::shoot()
 {
+  if((pistolBulletsRemain <= 0 && pistol) || pistolIsReloading)
+    return;
+  if((shotgunBulletsRemain <= 0 && shotgun) || shotgunIsReloading)
+    return;
+  if((assaultRifleBulletsRemain <= 0 && assaultRifle) || assaultRifleIsReloading)
+    return;
   if(!collision)
   {
-    if(shotgun && timeSinceLastShot < shotgunInterval)
+    if(pistol && timeSinceLastShot < pistolInterval)
       return;
-    else if(!shotgun && timeSinceLastShot < pistolInterval)
+    else if(shotgun && timeSinceLastShot < shotgunInterval)
+      return;
+    else if(assaultRifle && timeSinceLastShot < assaultRifleInterval)
       return;
     if(shotgun)
       sound[2];
@@ -214,6 +299,7 @@ void Player::shoot()
     {
       if(shotgun)
       {
+        shotgunBulletsRemain--;
         Projectile *p1 = new Projectile(projectileName);
         Projectile *p2 = new Projectile(projectileName);
         Projectile *p3 = new Projectile(projectileName);
@@ -271,6 +357,10 @@ void Player::shoot()
       }
       else
       {
+        if(pistol)
+          pistolBulletsRemain--;
+        else
+          assaultRifleBulletsRemain--;
         Projectile *p = new Projectile(projectileName);
         if (getVelocityX() > 0 || facing == RIGHT)
         {
@@ -303,6 +393,7 @@ void Player::shoot()
     {
       if(shotgun)
       {
+        shotgunBulletsRemain--;
         Projectile *p1 = new Projectile(projectileName);
         Projectile *p2 = new Projectile(projectileName);
         Projectile *p3 = new Projectile(projectileName);
@@ -360,6 +451,10 @@ void Player::shoot()
       }
       else
       {
+        if(pistol)
+          pistolBulletsRemain--;
+        else
+          assaultRifleBulletsRemain--;
         Projectile *p = new Projectile(projectileName);
         if (getVelocityX() > 0 || facing == RIGHT)
         {
@@ -390,4 +485,85 @@ void Player::shoot()
       timeSinceLastShot = 0;
     }
   }
+}
+
+void Player::cycleLeft()
+{
+  if(pistolIsReloading || shotgunIsReloading || assaultRifleIsReloading)
+    return;
+  if(pistol)
+  {
+    pistol = false;
+    shotgun = false;
+    assaultRifle = true;
+  }
+  else if(shotgun)
+  {
+    pistol = true;
+    shotgun = false;
+    assaultRifle = false;
+  }
+  else if(assaultRifle)
+  {
+    pistol = false;
+    shotgun = true;
+    assaultRifle = false;
+  }
+}
+
+void Player::cycleRight()
+{
+  if(pistolIsReloading || shotgunIsReloading || assaultRifleIsReloading)
+    return;
+  if(pistol)
+  {
+    pistol = false;
+    shotgun = true;
+    assaultRifle = false;
+  }
+  else if(shotgun)
+  {
+    pistol = false;
+    shotgun = false;
+    assaultRifle = true;
+  }
+  else if(assaultRifle)
+  {
+    pistol = true;
+    shotgun = false;
+    assaultRifle = false;
+  }
+}
+
+std::string Player::getWeapon()
+{
+  if(pistol)
+    return "pistol";
+  else if(shotgun)
+    return "shotgun";
+  else if(assaultRifle)
+    return "assaultRifle";
+  return " ";
+}
+
+int Player::getBulletsRemain()
+{
+  if(pistol)
+    return pistolBulletsRemain;
+  else if(shotgun)
+    return shotgunBulletsRemain;
+  else if(assaultRifle)
+    return assaultRifleBulletsRemain;
+  return 0;
+}
+
+int Player::getBulletsClip()
+{
+  if(pistol)
+    return pistolClip;
+  else if(shotgun)
+    return shotgunClip;
+  else if(assaultRifle)
+    return assaultRifleClip;
+  return 0;
 }

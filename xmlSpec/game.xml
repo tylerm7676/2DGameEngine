@@ -7,19 +7,16 @@
 
 <numZombies>100</numZombies>
 <numLives>11</numLives>
-<wave1>5</wave1>
-<wave2>10</wave2>
-<wave3>15</wave3>
-<wave4>20</wave4>
-<wave5>25</wave5>
-<wave6>30</wave6>
-<wave7>35</wave7>
-<wave8>40</wave8>
-<wave9>45</wave9>
-<wave10>50</wave10>
-
-<pistolClip>7</pistolClip>
-<shotgunClip>5</shotgunClip>
+<wave1>15</wave1>
+<wave2>20</wave2>
+<wave3>25</wave3>
+<wave4>30</wave4>
+<wave5>35</wave5>
+<wave6>40</wave6>
+<wave7>45</wave7>
+<wave8>50</wave8>
+<wave9>55</wave9>
+<wave10>60</wave10>
 
 <view>
   <width>1280</width>
@@ -275,6 +272,13 @@
   <minSpeed>900</minSpeed>
   <pistolInterval>350</pistolInterval>
   <shotgunInterval>900</shotgunInterval>
+  <assaultRifleInterval>150</assaultRifleInterval>
+  <pistolClip>7</pistolClip>
+  <shotgunClip>5</shotgunClip>
+  <assaultRifleClip>30</assaultRifleClip>
+  <pistolReloadInterval>2000</pistolReloadInterval>
+  <shotgunReloadInterval>4000</shotgunReloadInterval>
+  <assaultRifleReloadInterval>3000</assaultRifleReloadInterval>
   <maxDistance>800</maxDistance>
 </Pistol>
 

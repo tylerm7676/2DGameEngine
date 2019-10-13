@@ -51,20 +51,15 @@ SmartSprite::SmartSprite(const std::string& name, const Player* p) :
   collided(false),
   colliding(false),
   explosion(nullptr),
-  explosionStartTime(-1),
-  numLives(GameData::getInstance().getXmlInt("numZombiesLives")),
-  livesLeft(GameData::getInstance().getXmlInt("numZombiesLives")),
+  explosionInterval(GameData::getInstance().getXmlFloat(name+"/explosionInterval")),
+  timeSinceLastCollide(0),
+  numLives(GameData::getInstance().getXmlInt(name+"/lives")),
+  livesLeft(GameData::getInstance().getXmlInt(name+"/lives")),
   sound() {}
 
 void SmartSprite::randomizeVelocity()
 {
-  float vx = getVelocityX();
-  float vy = getVelocityY();
-  float newvx = GameData::getInstance().getRandFloat(vx-50, vx+50);
-  float newvy = GameData::getInstance().getRandFloat(vy-50, vy+50);
-  newvx *= [](){ if(rand()%2) return -1; else return 1; }();
-  newvy *= [](){ if(rand()%2) return -1; else return 1; }();
-  setVelocity(Vector2f(newvx, newvy));
+  setVelocity(getVelocity());
 }
 
 void SmartSprite::randomizePosition()
@@ -131,12 +126,14 @@ void SmartSprite::update(Uint32 ticks)
 {
   if(collided && colliding)
   {
+    timeSinceLastCollide += ticks;
     explosion->update(ticks);
-    if((Clock::getInstance().getSeconds() - explosionStartTime) >= 0.001)
+    if(timeSinceLastCollide > explosionInterval)
     {
       colliding = false;
       delete explosion;
       explosion = NULL;
+      timeSinceLastCollide = 0;
     }
     return;
   }
@@ -190,5 +187,5 @@ void SmartSprite::collide()
   explosion->setPosition(getPosition());
   explosion->setVelocityX(0);
   explosion->setVelocityY(0);
-  explosionStartTime = Clock::getInstance().getSeconds();
+  //explosionStartTime = Clock::getInstance().getSeconds();
 }

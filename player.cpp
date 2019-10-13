@@ -103,15 +103,15 @@ Player::Player(const std::string& name) :
   collision(false),
   collided(false),
   colliding(false),
-  startingVelocity(getVelocity()),
+  velocity(getVelocity()),
   slowDownFactor(GameData::getInstance().getXmlFloat(name+"/slowDownFactor")),
   explosion(nullptr),
   explosionStartTime(-1),
   projectileName(GameData::getInstance().getXmlStr(name+"/projectileName")),
   activeProjectiles(),
   freeProjectiles(),
-  numLives(GameData::getInstance().getXmlInt("numLives")),
-  livesLeft(GameData::getInstance().getXmlInt("numLives")),
+  numLives(GameData::getInstance().getXmlInt(name+"/lives")),
+  livesLeft(GameData::getInstance().getXmlInt(name+"/lives")),
   godMode(false),
   minSpeed(GameData::getInstance().getXmlInt(projectileName+"/minSpeed")),
   pistolInterval(GameData::getInstance().getXmlInt(projectileName+"/pistolInterval")),
@@ -154,7 +154,7 @@ void Player::moveLeft()
   if(livesLeft > 0)
   {
     if(getX() > getminBoundX())
-      setVelocityX(-startingVelocity[0]);
+      setVelocityX(-velocity[0]);
     facing = LEFT;
   }
 }
@@ -164,7 +164,7 @@ void Player::moveRight()
   if(livesLeft > 0)
   {
     if(getX() < getmaxBoundX() - getScaledWidth())
-      setVelocityX(startingVelocity[0]);
+      setVelocityX(velocity[0]);
     facing = RIGHT;
   }
 }
@@ -174,7 +174,7 @@ void Player::moveUp()
   if(livesLeft > 0)
   {
     if(getY() > getminBoundY())
-      setVelocityY(-startingVelocity[1]);
+      setVelocityY(-velocity[1]);
     facing = UP;
   }
 }
@@ -184,7 +184,7 @@ void Player::moveDown()
   if(livesLeft > 0)
   {
     if(getY() < getmaxBoundY() - getScaledHeight())
-      setVelocityY(startingVelocity[1]);
+      setVelocityY(velocity[1]);
     facing = DOWN;
   }
 }
@@ -207,7 +207,7 @@ void Player::update(Uint32 ticks)
   {
     explosion->update(ticks);
     activeProjectiles.clear();
-    if((Clock::getInstance().getSeconds() - explosionStartTime) >= 0.001)
+    if((Clock::getInstance().getSeconds() - explosionStartTime) >= 0.01)
     {
       colliding = false;
       delete explosion;

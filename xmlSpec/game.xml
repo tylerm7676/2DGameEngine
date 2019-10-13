@@ -5,19 +5,6 @@
 <frameCapOn>true</frameCapOn>
 <period>17</period>
 
-<numZombiesLives>3</numZombiesLives>
-<numLives>20</numLives>
-<wave1>5</wave1>
-<wave2>10</wave2>
-<wave3>15</wave3>
-<wave4>30</wave4>
-<wave5>35</wave5>
-<wave6>40</wave6>
-<wave7>45</wave7>
-<wave8>50</wave8>
-<wave9>55</wave9>
-<wave10>60</wave10>
-
 <view>
   <width>1280</width>
   <height>720</height>
@@ -36,24 +23,206 @@
   <transparency>false</transparency>
 </back>
 
-<menu>
+<wave1>
+  <total>5</total>
+  <slowNum>5</slowNum>
+  <fastNum>0</fastNum>
+</wave1>
+<wave2>
+  <total>10</total>
+  <slowNum>10</slowNum>
+  <fastNum>0</fastNum>
+</wave2>
+<wave3>
+  <total>15</total>
+  <slowNum>15</slowNum>
+  <fastNum>0</fastNum>
+</wave3>
+<wave4>
+  <total>20</total>
+  <slowNum>20</slowNum>
+  <fastNum>0</fastNum>
+</wave4>
+<wave5>
+  <total>30</total>
+  <slowNum>25</slowNum>
+  <fastNum>5</fastNum>
+</wave5>
+<wave6>
+  <total>40</total>
+  <slowNum>30</slowNum>
+  <fastNum>10</fastNum>
+</wave6>
+<wave7>
+  <total>50</total>
+  <slowNum>35</slowNum>
+  <fastNum>15</fastNum>
+</wave7>
+<wave8>
+  <total>60</total>
+  <slowNum>40</slowNum>
+  <fastNum>20</fastNum>
+</wave8>
+<wave9>
+  <total>70</total>
+  <slowNum>45</slowNum>
+  <fastNum>25</fastNum>
+</wave9>
+<wave10>
+  <total>80</total>
+  <slowNum>50</slowNum>
+  <fastNum>30</fastNum>
+</wave10>
+
+<Cowboy>
+  <file>assets/Cowboy.png</file>
+  <lives>20</lives>
+  <startPos x="960" y="540"/>
+  <velocity x="250" y="250"/>
+  <minBound x="0" y="0"/>
+  <maxBound x="1920" y="1080"/>
+  <frames>16</frames>
+  <leftFrames>4</leftFrames>
+  <rightFrames>4</rightFrames>
+  <upFrames>4</upFrames>
+  <downFrames>4</downFrames>
+  <frameInterval>200</frameInterval>
+  <twoWay>true</twoWay>
+  <imageWidth>62</imageWidth>
+  <imageHeight>62</imageHeight>
+  <scale>1</scale>
+  <slowDownFactor>0.0</slowDownFactor>
+  <transparency>false</transparency>
+  <projectileName>Bullet</projectileName>
+</Cowboy>
+
+<Zombie>
+  <file>assets/Zombie.png</file>
+  <lives>3</lives>
+  <startPos x="640" y="-100"/>
+  <velocity x="80" y="80"/>
+  <minBound x="0" y="0"/>
+  <maxBound x="1920" y="1080"/>
+  <frames>16</frames>
+  <leftFrames>4</leftFrames>
+  <rightFrames>4</rightFrames>
+  <upFrames>4</upFrames>
+  <downFrames>4</downFrames>
+  <frameInterval>100</frameInterval>
+  <explosionInterval>200</explosionInterval>
+  <twoWay>true</twoWay>
+  <imageWidth>62</imageWidth>
+  <imageHeight>62</imageHeight>
+  <scale>1</scale>
+  <slowDownFactor>0.30</slowDownFactor>
+  <safeDistance>200</safeDistance>
+  <transparency>false</transparency>
+</Zombie>
+
+<FastZombie>
+  <file>assets/Zombie.png</file>
+  <lives>3</lives>
+  <startPos x="640" y="-100"/>
+  <velocity x="80" y="80"/>
+  <minBound x="0" y="0"/>
+  <maxBound x="1920" y="1080"/>
+  <frames>16</frames>
+  <leftFrames>4</leftFrames>
+  <rightFrames>4</rightFrames>
+  <upFrames>4</upFrames>
+  <downFrames>4</downFrames>
+  <frameInterval>200</frameInterval>
+  <twoWay>true</twoWay>
+  <imageWidth>62</imageWidth>
+  <imageHeight>62</imageHeight>
+  <scale>1</scale>
+  <slowDownFactor>0.30</slowDownFactor>
+  <safeDistance>400</safeDistance>
+  <transparency>false</transparency>
+</FastZombie>
+
+<Bullet>
+  <file>assets/bullet.png</file>
+  <startPos x="0" y="0"/>
+  <velocity x="0" y="0"/>
+  <minBound x="0" y="0"/>
+  <maxBound x="1920" y="1080"/>
+  <frames>4</frames>
+  <leftFrames>1</leftFrames>
+  <rightFrames>1</rightFrames>
+  <upFrames>1</upFrames>
+  <downFrames>1</downFrames>
+  <frameInterval>0</frameInterval>
+  <twoWay>true</twoWay>
+  <imageWidth>32</imageWidth>
+  <imageHeight>32</imageHeight>
+  <scale>0.35</scale>
+  <transparency>false</transparency>
+  <minSpeed>900</minSpeed>
+  <pistolInterval>350</pistolInterval>
+  <shotgunInterval>900</shotgunInterval>
+  <assaultRifleInterval>150</assaultRifleInterval>
+  <pistolClip>7</pistolClip>
+  <shotgunClip>5</shotgunClip>
+  <assaultRifleClip>30</assaultRifleClip>
+  <pistolReloadInterval>2000</pistolReloadInterval>
+  <shotgunReloadInterval>4000</shotgunReloadInterval>
+  <assaultRifleReloadInterval>3000</assaultRifleReloadInterval>
+  <maxDistance>800</maxDistance>
+</Bullet>
+
+<Explosion>
+  <file>assets/Splat.png</file>
+  <startPos x="0" y="0"/>
+  <velocity x="0" y="0"/>
+  <minBound x="0" y="0"/>
+  <maxBound x="1920" y="1080"/>
+  <frames>4</frames>
+  <leftFrames>1</leftFrames>
+  <rightFrames>1</rightFrames>
+  <upFrames>1</upFrames>
+  <downFrames>1</downFrames>
+  <frameInterval>50</frameInterval>
+  <twoWay>false</twoWay>
+  <imageWidth>64</imageWidth>
+  <imageHeight>64</imageHeight>
+  <scale>1.5</scale>
+  <transparency>false</transparency>
+</Explosion>
+
+<Menu>
+  <width>1280</width>
+  <height>720</height>
+  <noOfOptions>3</noOfOptions>
+  <loc x="0" y="0"/>
+  <msg x="600" y="150"/>
+  <optionLoc x="640" y="275"/>
+  <color r="0" g="0" b="0" a="255"/>
+  <backColor r="255" g="0" b="0" a="255"/>
+  <option0>Start</option0>
+  <option1>Buy Weapons</option1>
+  <option2>Controls</option2>
+  <spaces>100</spaces>
+</Menu>
+
+<BuyMenu>
   <width>1280</width>
   <height>720</height>
   <noOfOptions>2</noOfOptions>
   <loc x="0" y="0"/>
   <msg x="600" y="150"/>
-  <optionLoc x="640" y="225"/>
+  <optionLoc x="640" y="275"/>
   <color r="0" g="0" b="0" a="255"/>
   <backColor r="255" g="0" b="0" a="255"/>
-  <option0>Start</option0>
-  <option1>Options</option1>
-  <spaces>150</spaces>
-</menu>
+  <option0>Purchase Pistol</option0>
+  <option1>Purchase Pistol Ammo</option1>
+  <spaces>100</spaces>
+</BuyMenu>
 
 <clickOn>
   <file>assets/Blood.png</file>
   <startPos x="0" y="0"/>
-  <startVel x="0" y="0"/>
+  <velocity x="0" y="0"/>
   <minBound x="0" y="0"/>
   <maxBound x="1920" y="1080"/>
   <startLoc x="340" y="170"/>
@@ -74,7 +243,7 @@
 <clickOff>
   <file>assets/Blood.png</file>
   <startPos x="0" y="0"/>
-  <startVel x="0" y="0"/>
+  <velocity x="0" y="0"/>
   <minBound x="0" y="0"/>
   <maxBound x="1920" y="1080"/>
   <startLoc x="340" y="170"/>
@@ -180,25 +349,6 @@
   <transparency>true</transparency>
 </world>
 
-<Explosion>
-  <file>assets/Splat.png</file>
-  <startPos x="0" y="0"/>
-  <startVel x="0" y="0"/>
-  <minBound x="0" y="0"/>
-  <maxBound x="1920" y="1080"/>
-  <frames>4</frames>
-  <leftFrames>1</leftFrames>
-  <rightFrames>1</rightFrames>
-  <upFrames>1</upFrames>
-  <downFrames>1</downFrames>
-  <frameInterval>200</frameInterval>
-  <twoWay>false</twoWay>
-  <imageWidth>64</imageWidth>
-  <imageHeight>64</imageHeight>
-  <scale>1.5</scale>
-  <transparency>false</transparency>
-</Explosion>
-
 <numberOfLights>1</numberOfLights>
 <lightSpec lightX1="100" lightY1="100" lightHealthY1="100" lightZ1="100"/>
 <!-- larger noneffectiveLighting the smaller the radius of the light -->
@@ -209,77 +359,5 @@
    <x>6</x>
    <y>6</y>
 </diffuseGrid>
-
-<Cowboy>
-  <file>assets/Cowboy.png</file>
-  <startPos x="640" y="360"/>
-  <startVel x="250" y="250"/>
-  <minBound x="0" y="0"/>
-  <maxBound x="1920" y="1080"/>
-  <frames>16</frames>
-  <leftFrames>4</leftFrames>
-  <rightFrames>4</rightFrames>
-  <upFrames>4</upFrames>
-  <downFrames>4</downFrames>
-  <frameInterval>200</frameInterval>
-  <twoWay>true</twoWay>
-  <imageWidth>62</imageWidth>
-  <imageHeight>62</imageHeight>
-  <scale>1</scale>
-  <slowDownFactor>0.0</slowDownFactor>
-  <transparency>false</transparency>
-  <projectileName>Pistol</projectileName>
-</Cowboy>
-
-<Zombie>
-  <file>assets/Zombie.png</file>
-  <startPos x="640" y="-100"/>
-  <startVel x="80" y="80"/>
-  <minBound x="0" y="0"/>
-  <maxBound x="1920" y="1080"/>
-  <frames>16</frames>
-  <leftFrames>4</leftFrames>
-  <rightFrames>4</rightFrames>
-  <upFrames>4</upFrames>
-  <downFrames>4</downFrames>
-  <frameInterval>200</frameInterval>
-  <twoWay>true</twoWay>
-  <imageWidth>62</imageWidth>
-  <imageHeight>62</imageHeight>
-  <scale>1</scale>
-  <slowDownFactor>0.30</slowDownFactor>
-  <safeDistance>400</safeDistance>
-  <transparency>false</transparency>
-</Zombie>
-
-<Pistol>
-  <file>assets/pistol.png</file>
-  <startPos x="0" y="0"/>
-  <startVel x="0" y="0"/>
-  <minBound x="0" y="0"/>
-  <maxBound x="1920" y="1080"/>
-  <frames>4</frames>
-  <leftFrames>1</leftFrames>
-  <rightFrames>1</rightFrames>
-  <upFrames>1</upFrames>
-  <downFrames>1</downFrames>
-  <frameInterval>0</frameInterval>
-  <twoWay>true</twoWay>
-  <imageWidth>32</imageWidth>
-  <imageHeight>32</imageHeight>
-  <scale>0.35</scale>
-  <transparency>false</transparency>
-  <minSpeed>900</minSpeed>
-  <pistolInterval>350</pistolInterval>
-  <shotgunInterval>900</shotgunInterval>
-  <assaultRifleInterval>150</assaultRifleInterval>
-  <pistolClip>7</pistolClip>
-  <shotgunClip>5</shotgunClip>
-  <assaultRifleClip>30</assaultRifleClip>
-  <pistolReloadInterval>2000</pistolReloadInterval>
-  <shotgunReloadInterval>4000</shotgunReloadInterval>
-  <assaultRifleReloadInterval>3000</assaultRifleReloadInterval>
-  <maxDistance>800</maxDistance>
-</Pistol>
 
 </GameData>

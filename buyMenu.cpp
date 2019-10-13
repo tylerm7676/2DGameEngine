@@ -1,48 +1,48 @@
 #include <sstream>
-#include "menu.h"
+#include "buyMenu.h"
 
-Menu::Menu(SDL_Renderer* rend) :
+BuyMenu::BuyMenu(SDL_Renderer* rend) :
   renderer(rend),
   gdata(GameData::getInstance()),
-  hudFrame({gdata.getXmlInt("Menu/loc/x"),
-            gdata.getXmlInt("Menu/loc/y"),
-            gdata.getXmlInt("Menu/width"),
-            gdata.getXmlInt("Menu/height")}),
-  backColor({(Uint8)gdata.getXmlInt("Menu/backColor/r"),
-             (Uint8)gdata.getXmlInt("Menu/backColor/g"),
-             (Uint8)gdata.getXmlInt("Menu/backColor/b"),
-             (Uint8)gdata.getXmlInt("Menu/backColor/a")}),
-  menuColor({(Uint8)gdata.getXmlInt("Menu/color/r"),
-             (Uint8)gdata.getXmlInt("Menu/color/g"),
-             (Uint8)gdata.getXmlInt("Menu/color/b"),
-             (Uint8)gdata.getXmlInt("Menu/color/a")}),
+  hudFrame({gdata.getXmlInt("BuyMenu/loc/x"),
+            gdata.getXmlInt("BuyMenu/loc/y"),
+            gdata.getXmlInt("BuyMenu/width"),
+            gdata.getXmlInt("BuyMenu/height")}),
+  backColor({(Uint8)gdata.getXmlInt("BuyMenu/backColor/r"),
+             (Uint8)gdata.getXmlInt("BuyMenu/backColor/g"),
+             (Uint8)gdata.getXmlInt("BuyMenu/backColor/b"),
+             (Uint8)gdata.getXmlInt("BuyMenu/backColor/a")}),
+  menuColor({(Uint8)gdata.getXmlInt("BuyMenu/color/r"),
+             (Uint8)gdata.getXmlInt("BuyMenu/color/g"),
+             (Uint8)gdata.getXmlInt("BuyMenu/color/b"),
+             (Uint8)gdata.getXmlInt("BuyMenu/color/a")}),
   clock(Clock::getInstance()),
   io(IoMod::getInstance()),
   options(),
-  optionLoc({gdata.getXmlInt("Menu/optionLoc/x"),
-               gdata.getXmlInt("Menu/optionLoc/y")}),
+  optionLoc({gdata.getXmlInt("BuyMenu/optionLoc/x"),
+               gdata.getXmlInt("BuyMenu/optionLoc/y")}),
   clicks({Sprite("clickOff"), Sprite("clickOn")}),
   currentClick(0),
   currentOption(0),
-  spaces(gdata.getXmlInt("Menu/spaces")),
+  spaces(gdata.getXmlInt("BuyMenu/spaces")),
   startClickX(optionLoc[0] - spaces),
   startClickY(optionLoc[1] + spaces),
   clickX(startClickX),
   clickY(startClickY)
   {
-    int noOfOptions = gdata.getXmlInt("Menu/noOfOptions");
+    int noOfOptions = gdata.getXmlInt("BuyMenu/noOfOptions");
     std::stringstream strm;
     for (int i = 0; i < noOfOptions; ++i)
     {
       strm.clear();
       strm.str("");
       strm << i;
-      std::string option("Menu/option" + strm.str());
+      std::string option("BuyMenu/option" + strm.str());
       options.push_back(gdata.getXmlStr(option));
     }
   }
 
-void Menu::incrIcon()
+void BuyMenu::incrIcon()
 {
   clickY += spaces;
   if(clickY > static_cast<int>(options.size()) * spaces + optionLoc[1])
@@ -54,7 +54,7 @@ void Menu::incrIcon()
     ++currentOption;
 }
 
-void Menu::decrIcon()
+void BuyMenu::decrIcon()
 {
   clickY -= spaces;
   if(clickY < spaces+optionLoc[1])
@@ -66,7 +66,7 @@ void Menu::decrIcon()
     --currentOption;
 }
 
-void Menu::drawBackground() const
+void BuyMenu::drawBackground() const
 {
   // First set the blend mode so that alpha blending will work;
   // the default blend mode is SDL_BLENDMODE_NONE!
@@ -85,7 +85,7 @@ void Menu::drawBackground() const
 
 }
 
-/*int Menu::getBuyEventLoop() const
+/*int BuyMenu::getBuyEventLoop() const
 {
   SDL_Event event;
   const Uint8* keystate;
@@ -106,8 +106,6 @@ void Menu::drawBackground() const
           done = true;
           break;
         }
-        if(keystate[SDL_SCANCODE_DOWN]) incrIcon();
-        if(keystate[SDL_SCANCODE_UP]) decrIcon();
         if(keystate[SDL_SCANCODE_RETURN])
         {
           lightOn();
@@ -133,59 +131,12 @@ void Menu::drawBackground() const
   return 0;
 }*/
 
-void Menu::getControlEventLoop() const
-{
-  SDL_Event event;
-  const Uint8* keystate;
-  bool done = false;
-  drawBackground();
-  std::string inNumber = " ";
-  std::string msg = "Press return/esc when finished.";
-  while(!done)
-  {
-    // The next loop polls for events, guarding against key bounce:
-    while(SDL_PollEvent(&event))
-    {
-      keystate = SDL_GetKeyboardState(NULL);
-      if(event.type ==  SDL_QUIT) { done = true; break; }
-      if(event.type == SDL_KEYDOWN)
-      {
-        if(keystate[SDL_SCANCODE_ESCAPE] || keystate[SDL_SCANCODE_RETURN])
-        {
-          done = true;
-          break;
-        }
-      }
-      // In this section of the event loop we allow key bounce:
-      drawBackground();
-      io.writeText("Kill All Zombies to Win!", hudFrame.x + 540, hudFrame.y + 140);
-      io.writeText("Enter Number of Zombies: 1-50 = Easy, 51-100 = Medium, 100 or more = Hard",
-        hudFrame.x + 290, hudFrame.y + 240);
-      io.writeText(msg, hudFrame.x + 500, hudFrame.y + 280);
-      io.writeText(inNumber, hudFrame.x + 620, hudFrame.y + 340);
-      io.writeText("Controls:", hudFrame.x + 600, hudFrame.y + 400);
-      io.writeText("W: Up, A: Left, S: Down, D: Right, Space: Shoot Weapons, P: Pause, R: Restart, F1: Toggle HUDs, M: Toggle Music, ",
-      hudFrame.x + 100, hudFrame.y + 440);
-      io.writeText("G: Toggle God Mode, Q or E: Cycle Weapons, Player must be facing a certain direction to shoot in that direction",
-      hudFrame.x + 100, hudFrame.y + 480);
-      SDL_RenderPresent(renderer);
-    }
-  }
-}
-
-void Menu::getControlMenu() const { getControlEventLoop(); }
-
 //int Menu::getBuyMenu() const { return getBuyEventLoop(); }
 
-void Menu::draw(int wave) const
+void BuyMenu::draw() const
 {
   drawBackground();
-  if(wave == 0)
-  {
-    io.writeText("Zombies Menu", hudFrame.x + 250, hudFrame.y + 150, true);
-  }
-  else
-    io.writeText("Wave " + std::to_string(wave), hudFrame.x + 425, hudFrame.y + 150, true);
+  io.writeText("Buy Weapons", hudFrame.x + 250, hudFrame.y + 150, true);
   int space = spaces;
   for(const std::string& option : options)
   {

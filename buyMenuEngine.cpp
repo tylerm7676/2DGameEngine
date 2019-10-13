@@ -4,28 +4,27 @@
 #include <string>
 #include "sprite.h"
 #include "gameData.h"
-#include "menuEngine.h"
+#include "buyMenuEngine.h"
 #include "renderContext.h"
 
-MenuEngine::~MenuEngine() {}
+BuyMenuEngine::~BuyMenuEngine() {}
 
-MenuEngine::MenuEngine() :
+BuyMenuEngine::BuyMenuEngine() :
   clock( Clock::getInstance() ),
   renderer( RenderContext::getInstance().getRenderer() ),
   menu(renderer),
-  buyMenuEngine(),
   optionChoice(-1),
   result(0) {}
 
-void MenuEngine::draw(int wave) const
+void BuyMenuEngine::draw() const
 {
-  menu.draw(wave);
+  menu.draw();
   SDL_RenderPresent(renderer);
 }
 
-void MenuEngine::update(Uint32) {}
+void BuyMenuEngine::update(Uint32) {}
 
-int MenuEngine::play(int wave, Player* player)
+int BuyMenuEngine::play(Player* player)
 {
   SDL_Event event;
   const Uint8* keystate;
@@ -50,13 +49,22 @@ int MenuEngine::play(int wave, Player* player)
         {
           menu.lightOn();
           optionChoice = menu.getOptionNo();
-          if(optionChoice == 0) done = true;
+          if(optionChoice == 0)
+          {
+            result = 1;
+            done = true;
+            break;
+          }
           if(optionChoice == 1)
           {
-            result = buyMenuEngine.play(player);
+            result = 2;
+            done = true;
+            break;
           }
           if(optionChoice == 2)
-            menu.getControlMenu();
+          {
+            result = 3;
+          }
         }
       }
       keystate = SDL_GetKeyboardState(NULL);
@@ -64,7 +72,7 @@ int MenuEngine::play(int wave, Player* player)
         menu.lightOff();
     }
     // In this section of the event loop we allow key bounce:
-    draw(wave);
+    draw();
   }
   return result;
 }

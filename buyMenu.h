@@ -6,7 +6,7 @@
 #include "ioMod.h"
 #include "sprite.h"
 
-class Menu
+class BuyMenu
 {
   private:
     SDL_Renderer* renderer;
@@ -27,13 +27,13 @@ class Menu
     int clickX;
     int clickY;
     void drawBackground() const;
-    void getControlEventLoop() const;
+    //int getBuyEventLoop() const;
 
   public:
-    Menu(SDL_Renderer*);
-    Menu(const Menu&) = delete;
-    Menu& operator=(const Menu&) = delete;
-    void draw(int) const;
+    BuyMenu(SDL_Renderer*);
+    BuyMenu(const BuyMenu&) = delete;
+    BuyMenu& operator=(const BuyMenu&) = delete;
+    void draw() const;
     void update();
     void incrIcon();
     void decrIcon();
@@ -41,5 +41,4 @@ class Menu
     void lightOff() { currentClick = 0; }
     int getOptionNo() const { return currentOption; }
     //int getBuyMenu() const;
-    void getControlMenu() const;
 };

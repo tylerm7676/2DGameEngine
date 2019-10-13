@@ -35,18 +35,28 @@ Engine::Engine() :
   smartSprites(),
   collisionStrategy(new PerPixelCollisionStrategy),
   menuEngine(),
-  numZombies(GameData::getInstance().getXmlInt("wave1") + GameData::getInstance().getXmlInt("wave2") + GameData::getInstance().getXmlInt("wave3")),
+  numZombies(GameData::getInstance().getXmlInt("wave1/total")
+    + GameData::getInstance().getXmlInt("wave2/total")
+    + GameData::getInstance().getXmlInt("wave3/total")
+    + GameData::getInstance().getXmlInt("wave4/total")
+    + GameData::getInstance().getXmlInt("wave5/total")
+    + GameData::getInstance().getXmlInt("wave6/total")
+    + GameData::getInstance().getXmlInt("wave7/total")
+    + GameData::getInstance().getXmlInt("wave8/total")
+    + GameData::getInstance().getXmlInt("wave9/total")
+    + GameData::getInstance().getXmlInt("wave10/total")),
   waveNum(0),
-  wave1(GameData::getInstance().getXmlInt("wave1")),
-  wave2(GameData::getInstance().getXmlInt("wave2")),
-  wave3(GameData::getInstance().getXmlInt("wave3")),
-  wave4(GameData::getInstance().getXmlInt("wave4")),
-  wave5(GameData::getInstance().getXmlInt("wave5")),
-  wave6(GameData::getInstance().getXmlInt("wave6")),
-  wave7(GameData::getInstance().getXmlInt("wave7")),
-  wave8(GameData::getInstance().getXmlInt("wave8")),
-  wave9(GameData::getInstance().getXmlInt("wave9")),
-  wave10(GameData::getInstance().getXmlInt("wave10"))
+  wave1(GameData::getInstance().getXmlInt("wave1/total")),
+  wave2(GameData::getInstance().getXmlInt("wave2/total")),
+  wave3(GameData::getInstance().getXmlInt("wave3/total")),
+  wave4(GameData::getInstance().getXmlInt("wave4/total")),
+  wave5(GameData::getInstance().getXmlInt("wave5/total")),
+  wave6(GameData::getInstance().getXmlInt("wave6/total")),
+  wave7(GameData::getInstance().getXmlInt("wave7/total")),
+  wave8(GameData::getInstance().getXmlInt("wave8/total")),
+  wave9(GameData::getInstance().getXmlInt("wave9/total")),
+  wave10(GameData::getInstance().getXmlInt("wave10/total")),
+  result(0)
   //lights()
   {
     menuEngine.play(waveNum);
@@ -86,7 +96,13 @@ void Engine::draw()
   else if(smartSprites.size() <= 0 && waveNum == 1)
   {
     waveNum++;
-    menuEngine.play(waveNum);
+    result = menuEngine.play(waveNum, player);
+    if(result == 0)
+      std::cout << "Nothing\n";
+    if(result == 1)
+      std::cout << "Purchase Pistol Ammo\n";
+    if(result == 2)
+      std::cout << "Purchase Shotgun\n";
     for(int i = 0; i < wave2; i++)
     {
       smartSprites.push_back(new SmartSprite("Zombie", player));
@@ -243,7 +259,8 @@ void Engine::checkForCollisions()
       SmartSprite* hitSmartSprite = *it;
       hitSmartSprite->loseLife();
       hitSmartSprite->setCollided(false);
-      hitSmartSprite->randomizeVelocity();
+      //hitSmartSprite->randomizeVelocity();
+      hitSmartSprite->setVelocity(Vector2f(80, 80));
       if(hitSmartSprite->getNumLives() <= 0)
       {
         player->detach(hitSmartSprite);

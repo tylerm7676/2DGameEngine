@@ -17,7 +17,8 @@ class SmartSprite : public Drawable
     bool collided;
     bool colliding;
     Sprite* explosion;
-    float explosionStartTime;
+    float explosionInterval;
+    float timeSinceLastCollide;
     int numLives;
     int livesLeft;
     Sound sound;

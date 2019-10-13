@@ -1,3 +1,6 @@
+#ifndef PLAYER_H
+#define PLAYER_H
+
 #include <list>
 #include <cmath>
 #include "drawable.h"
@@ -16,7 +19,7 @@ class Player : public Drawable
     bool collision;
     bool collided;
     bool colliding;
-    Vector2f startingVelocity;
+    Vector2f velocity;
     float slowDownFactor;
     Sprite* explosion;
     float explosionStartTime;
@@ -94,3 +97,5 @@ class Player : public Drawable
     int getMoney() { return money; }
     int getPoints() { return points; }
 };
+
+#endif

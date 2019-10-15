@@ -43,12 +43,21 @@ class Player : public Drawable
     bool pistol;
     bool shotgun;
     bool assaultRifle;
-    int pistolBulletsRemain;
+    int pistolAmmoInClip;
+    int pistolAmmoTotal;
     int pistolClip;
-    int shotgunBulletsRemain;
+    int pistolAmmoCost;
+    int pistolAmount;
+    int shotgunAmmoInClip;
+    int shotgunAmmoTotal;
     int shotgunClip;
-    int assaultRifleBulletsRemain;
+    int shotgunAmmoCost;
+    int shotgunAmount;
+    int assaultRifleAmmoInClip;
+    int assaultRifleAmmoTotal;
     int assaultRifleClip;
+    int assaultRifleAmmoCost;
+    int assaultRifleAmount;
     bool pistolIsReloading;
     bool shotgunIsReloading;
     bool assaultRifleIsReloading;
@@ -92,10 +101,13 @@ class Player : public Drawable
     std::string getWeapon();
     void reload();
     void setReload();
-    int getBulletsRemain();
-    int getBulletsClip();
+    int getAmmoInClip();
+    int getAmmoTotal();
     int getMoney() { return money; }
     int getPoints() { return points; }
+    bool purchasePistolAmmo();
+    bool purchaseShotgunAmmo();
+    bool purchaseAssaultRifleAmmo();
 };
 
 #endif

@@ -1,7 +1,6 @@
 #include <vector>
 #include <SDL.h>
 #include "buyMenuEngine.h"
-#include "player.h"
 
 class MenuEngine
 {
@@ -11,7 +10,6 @@ class MenuEngine
     Menu menu;
     BuyMenuEngine buyMenuEngine;
     int optionChoice;
-    int result;
 
     void draw(int) const;
     void update(Uint32);
@@ -21,8 +19,7 @@ class MenuEngine
     ~MenuEngine();
     MenuEngine(const MenuEngine&) = delete;
     MenuEngine& operator=(const MenuEngine&) = delete;
-    int play(int, Player*);
+    void play(int, Player*);
     int getOptionChoice() const { return optionChoice; }
     bool starsOptionChosen();
-    void resetResult() { result = 0; }
 };

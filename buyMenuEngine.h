@@ -11,7 +11,6 @@ class BuyMenuEngine
     SDL_Renderer * const renderer;
     BuyMenu menu;
     int optionChoice;
-    int result;
 
     void draw() const;
     void update(Uint32);
@@ -21,8 +20,7 @@ class BuyMenuEngine
     ~BuyMenuEngine();
     BuyMenuEngine(const BuyMenuEngine&) = delete;
     BuyMenuEngine& operator=(const BuyMenuEngine&) = delete;
-    int play(Player* player);
+    void play(Player* player);
     int getOptionChoice() const { return optionChoice; }
     bool starsOptionChosen();
-    void resetResult() { result = 0; }
 };

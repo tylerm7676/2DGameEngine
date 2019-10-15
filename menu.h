@@ -21,6 +21,7 @@ class Menu
     std::vector<Sprite> clicks;
     int currentClick;
     int currentOption;
+    int noOfOptions;
     int spaces;
     int startClickX;
     int startClickY;
@@ -40,6 +41,5 @@ class Menu
     void lightOn() { currentClick = 1; }
     void lightOff() { currentClick = 0; }
     int getOptionNo() const { return currentOption; }
-    //int getBuyMenu() const;
     void getControlMenu() const;
 };

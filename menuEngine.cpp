@@ -10,12 +10,11 @@
 MenuEngine::~MenuEngine() {}
 
 MenuEngine::MenuEngine() :
-  clock( Clock::getInstance() ),
-  renderer( RenderContext::getInstance().getRenderer() ),
+  clock(Clock::getInstance()),
+  renderer(RenderContext::getInstance().getRenderer()),
   menu(renderer),
   buyMenuEngine(),
-  optionChoice(-1),
-  result(0) {}
+  optionChoice(-1) {}
 
 void MenuEngine::draw(int wave) const
 {
@@ -25,7 +24,7 @@ void MenuEngine::draw(int wave) const
 
 void MenuEngine::update(Uint32) {}
 
-int MenuEngine::play(int wave, Player* player)
+void MenuEngine::play(int wave, Player* player)
 {
   SDL_Event event;
   const Uint8* keystate;
@@ -50,10 +49,11 @@ int MenuEngine::play(int wave, Player* player)
         {
           menu.lightOn();
           optionChoice = menu.getOptionNo();
-          if(optionChoice == 0) done = true;
+          if(optionChoice == 0)
+            done = true;
           if(optionChoice == 1)
           {
-            result = buyMenuEngine.play(player);
+            buyMenuEngine.play(player);
           }
           if(optionChoice == 2)
             menu.getControlMenu();
@@ -66,5 +66,4 @@ int MenuEngine::play(int wave, Player* player)
     // In this section of the event loop we allow key bounce:
     draw(wave);
   }
-  return result;
 }

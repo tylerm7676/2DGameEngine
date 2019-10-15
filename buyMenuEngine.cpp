@@ -13,8 +13,7 @@ BuyMenuEngine::BuyMenuEngine() :
   clock( Clock::getInstance() ),
   renderer( RenderContext::getInstance().getRenderer() ),
   menu(renderer),
-  optionChoice(-1),
-  result(0) {}
+  optionChoice(-1) {}
 
 void BuyMenuEngine::draw() const
 {
@@ -24,11 +23,12 @@ void BuyMenuEngine::draw() const
 
 void BuyMenuEngine::update(Uint32) {}
 
-int BuyMenuEngine::play(Player* player)
+void BuyMenuEngine::play(Player* player)
 {
   SDL_Event event;
   const Uint8* keystate;
   bool done = false;
+  bool result;
   while(!done)
   {
     // The next loop polls for events, guarding against key bounce:
@@ -51,19 +51,55 @@ int BuyMenuEngine::play(Player* player)
           optionChoice = menu.getOptionNo();
           if(optionChoice == 0)
           {
-            result = 1;
-            done = true;
-            break;
+            result = player->purchasePistolAmmo();
+            if(!result)
+            {
+              std::cout << "Ammo not purchased\n";
+            }
+            else
+            {
+              std::cout << "Ammo purchased\n";
+              done = true;
+              break;
+            }
           }
           if(optionChoice == 1)
           {
-            result = 2;
             done = true;
             break;
           }
           if(optionChoice == 2)
           {
-            result = 3;
+            result = player->purchaseShotgunAmmo();
+            if(!result)
+            {
+              std::cout << "Ammo not purchased\n";
+            }
+            else
+            {
+              std::cout << "Ammo purchased\n";
+              done = true;
+              break;
+            }
+          }
+          if(optionChoice == 3)
+          {
+            done = true;
+            break;
+          }
+          if(optionChoice == 4)
+          {
+            result = player->purchaseAssaultRifleAmmo();
+            if(!result)
+            {
+              std::cout << "Ammo not purchased\n";
+            }
+            else
+            {
+              std::cout << "Ammo purchased\n";
+              done = true;
+              break;
+            }
           }
         }
       }
@@ -74,5 +110,4 @@ int BuyMenuEngine::play(Player* player)
     // In this section of the event loop we allow key bounce:
     draw();
   }
-  return result;
 }

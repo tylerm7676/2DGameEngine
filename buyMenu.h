@@ -21,13 +21,13 @@ class BuyMenu
     std::vector<Sprite> clicks;
     int currentClick;
     int currentOption;
+    int noOfOptions;
     int spaces;
     int startClickX;
     int startClickY;
     int clickX;
     int clickY;
     void drawBackground() const;
-    //int getBuyEventLoop() const;
 
   public:
     BuyMenu(SDL_Renderer*);
@@ -40,5 +40,4 @@ class BuyMenu
     void lightOn() { currentClick = 1; }
     void lightOff() { currentClick = 0; }
     int getOptionNo() const { return currentOption; }
-    //int getBuyMenu() const;
 };

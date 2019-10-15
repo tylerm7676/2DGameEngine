@@ -24,13 +24,13 @@ BuyMenu::BuyMenu(SDL_Renderer* rend) :
   clicks({Sprite("clickOff"), Sprite("clickOn")}),
   currentClick(0),
   currentOption(0),
+  noOfOptions(gdata.getXmlInt("BuyMenu/noOfOptions")),
   spaces(gdata.getXmlInt("BuyMenu/spaces")),
   startClickX(optionLoc[0] - spaces),
   startClickY(optionLoc[1] + spaces),
   clickX(startClickX),
   clickY(startClickY)
   {
-    int noOfOptions = gdata.getXmlInt("BuyMenu/noOfOptions");
     std::stringstream strm;
     for (int i = 0; i < noOfOptions; ++i)
     {
@@ -59,7 +59,7 @@ void BuyMenu::decrIcon()
   clickY -= spaces;
   if(clickY < spaces+optionLoc[1])
   {
-    clickY = startClickY + 2 * spaces;
+    clickY = startClickY + (noOfOptions-1) * spaces;
     currentOption = options.size() - 1;
   }
   else
@@ -85,58 +85,10 @@ void BuyMenu::drawBackground() const
 
 }
 
-/*int BuyMenu::getBuyEventLoop() const
-{
-  SDL_Event event;
-  const Uint8* keystate;
-  bool done = false;
-  drawBackground();
-  std::string msg = "Press return/esc when finished.";
-  while(!done)
-  {
-    // The next loop polls for events, guarding against key bounce:
-    while(SDL_PollEvent(&event))
-    {
-      keystate = SDL_GetKeyboardState(NULL);
-      if(event.type ==  SDL_QUIT) { done = true; break; }
-      if(event.type == SDL_KEYDOWN)
-      {
-        if(keystate[SDL_SCANCODE_ESCAPE])
-        {
-          done = true;
-          break;
-        }
-        if(keystate[SDL_SCANCODE_RETURN])
-        {
-          lightOn();
-          optionChoice = getOptionNo();
-          if(optionChoice == 0)
-          {
-            return 1;
-          }
-          if(optionChoice == 1)
-          {
-            return 2;
-          }
-        }
-      }
-      // In this section of the event loop we allow key bounce:
-      drawBackground();
-      io.writeText("Purchase Pistol", hudFrame.x + 540, hudFrame.y + 140);
-      io.writeText("Purchase Pistol Ammo", hudFrame.x + 540, hudFrame.y + 160);
-      io.writeText(msg, hudFrame.x + 500, hudFrame.y + 280);
-      SDL_RenderPresent(renderer);
-    }
-  }
-  return 0;
-}*/
-
-//int Menu::getBuyMenu() const { return getBuyEventLoop(); }
-
 void BuyMenu::draw() const
 {
   drawBackground();
-  io.writeText("Buy Weapons", hudFrame.x + 250, hudFrame.y + 150, true);
+  io.writeText("Buy Weapons", hudFrame.x + 260, hudFrame.y + 125, true);
   int space = spaces;
   for(const std::string& option : options)
   {

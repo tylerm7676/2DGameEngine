@@ -98,7 +98,7 @@
 
 <Zombie>
   <file>assets/Zombie.png</file>
-  <lives>3</lives>
+  <lives>2</lives>
   <startPos x="640" y="-100"/>
   <velocity x="80" y="80"/>
   <minBound x="0" y="0"/>
@@ -159,16 +159,22 @@
   <scale>0.35</scale>
   <transparency>false</transparency>
   <minSpeed>900</minSpeed>
-  <pistolInterval>350</pistolInterval>
-  <shotgunInterval>900</shotgunInterval>
+  <pistolInterval>250</pistolInterval>
+  <shotgunInterval>600</shotgunInterval>
   <assaultRifleInterval>150</assaultRifleInterval>
   <pistolClip>7</pistolClip>
   <shotgunClip>5</shotgunClip>
   <assaultRifleClip>30</assaultRifleClip>
-  <pistolReloadInterval>2000</pistolReloadInterval>
-  <shotgunReloadInterval>4000</shotgunReloadInterval>
-  <assaultRifleReloadInterval>3000</assaultRifleReloadInterval>
-  <maxDistance>800</maxDistance>
+  <pistolReloadInterval>1000</pistolReloadInterval>
+  <shotgunReloadInterval>2000</shotgunReloadInterval>
+  <assaultRifleReloadInterval>1500</assaultRifleReloadInterval>
+  <pistolAmmoCost>100</pistolAmmoCost>
+  <pistolAmount>70</pistolAmount>
+  <shotgunAmmoCost>200</shotgunAmmoCost>
+  <shotgunAmount>50</shotgunAmount>
+  <assaultRifleAmmoCost>500</assaultRifleAmmoCost>
+  <assaultRifleAmount>300</assaultRifleAmount>
+  <maxDistance>1000</maxDistance>
 </Bullet>
 
 <Explosion>
@@ -208,15 +214,18 @@
 <BuyMenu>
   <width>1280</width>
   <height>720</height>
-  <noOfOptions>2</noOfOptions>
+  <noOfOptions>5</noOfOptions>
   <loc x="0" y="0"/>
   <msg x="600" y="150"/>
-  <optionLoc x="640" y="275"/>
+  <optionLoc x="600" y="250"/>
   <color r="0" g="0" b="0" a="255"/>
   <backColor r="255" g="0" b="0" a="255"/>
-  <option0>Purchase Pistol</option0>
-  <option1>Purchase Pistol Ammo</option1>
-  <spaces>100</spaces>
+  <option0>Purchase Pistol Ammo</option0>
+  <option1>Purchase Shotgun</option1>
+  <option2>Purchase Shotgun Ammo</option2>
+  <option3>Purchase Assault Rifle</option3>
+  <option4>Purchase Assault Rifle Ammo</option4>
+  <spaces>65</spaces>
 </BuyMenu>
 
 <clickOn>
@@ -225,7 +234,7 @@
   <velocity x="0" y="0"/>
   <minBound x="0" y="0"/>
   <maxBound x="1920" y="1080"/>
-  <startLoc x="340" y="170"/>
+  <startLoc x="500" y="300"/>
   <speedX>0</speedX>
   <speedY>0</speedY>
   <transparency>true</transparency>
@@ -236,7 +245,7 @@
   <downFrames>0</downFrames>
   <frameInterval>200</frameInterval>
   <twoWay>true</twoWay>
-  <scale>2</scale>
+  <scale>1</scale>
   <slowDownFactor>0.0</slowDownFactor>
 </clickOn>
 
@@ -246,7 +255,7 @@
   <velocity x="0" y="0"/>
   <minBound x="0" y="0"/>
   <maxBound x="1920" y="1080"/>
-  <startLoc x="340" y="170"/>
+  <startLoc x="500" y="300"/>
   <speedX>0</speedX>
   <speedY>0</speedY>
   <transparency>true</transparency>
@@ -257,7 +266,7 @@
   <downFrames>0</downFrames>
   <frameInterval>200</frameInterval>
   <twoWay>true</twoWay>
-  <scale>2</scale>
+  <scale>1</scale>
   <slowDownFactor>0.0</slowDownFactor>
 </clickOff>
 

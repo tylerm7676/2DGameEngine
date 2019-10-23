@@ -111,14 +111,14 @@ void Menu::getControlEventLoop() const
       // In this section of the event loop we allow key bounce:
       drawBackground();
       io.writeText("Kill All Zombies to Win!", hudFrame.x + 540, hudFrame.y + 140);
-      io.writeText("Enter Number of Zombies: 1-50 = Easy, 51-100 = Medium, 100 or more = Hard",
+      io.writeText("There are 10 waves of Zombies with increasing difficulty",
         hudFrame.x + 290, hudFrame.y + 240);
       io.writeText(msg, hudFrame.x + 500, hudFrame.y + 280);
       io.writeText(inNumber, hudFrame.x + 620, hudFrame.y + 340);
       io.writeText("Controls:", hudFrame.x + 600, hudFrame.y + 400);
-      io.writeText("W: Up, A: Left, S: Down, D: Right, Space: Shoot Weapons, P: Pause, R: Restart, F1: Toggle HUDs, M: Toggle Music, ",
+      io.writeText("W: Up, A: Left, S: Down, D: Right, Space: Shoot Weapons, ESC: Pause/Buy Weapons, R: Reload, F1: Toggle HUDs",
       hudFrame.x + 100, hudFrame.y + 440);
-      io.writeText("G: Toggle God Mode, Q or E: Cycle Weapons, Player must be facing a certain direction to shoot in that direction",
+      io.writeText("M: Toggle Music, Q or E: Cycle Weapons, Player must be facing a certain direction to shoot in that direction",
       hudFrame.x + 100, hudFrame.y + 480);
       SDL_RenderPresent(renderer);
     }

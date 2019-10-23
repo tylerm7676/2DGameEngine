@@ -89,12 +89,17 @@ void BuyMenu::draw() const
 {
   drawBackground();
   io.writeText("Buy Weapons", hudFrame.x + 260, hudFrame.y + 125, true);
-  int space = spaces;
-  for(const std::string& option : options)
-  {
-    io.writeText(option, optionLoc[0], optionLoc[1] + space);
-    space += spaces;
-  }
+  int yLoc = 250;
+  io.writeText("$100 - Purchase Pistol Ammo", 600, yLoc + spaces);
+  yLoc += spaces;
+  io.writeText("$500 - Purchase Shotgun", 600, yLoc + spaces);
+  yLoc += spaces;
+  io.writeText("$200 - Purchase Shotgun Ammo", 600, yLoc + spaces);
+  yLoc += spaces;
+  io.writeText("$1000 - Purchase Assault Rifle", 600, yLoc + spaces);
+  yLoc += spaces;
+  io.writeText("$500 - Purchase Assault Rifle Ammo", 600, yLoc + spaces);
+
   // We have to draw the clickOn & clickOff relative to the screen,
   // and we don't want to offset by the location of the viewprot:
   clicks[currentClick].getImage()->draw(0, 0, clickX, clickY);

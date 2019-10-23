@@ -43,8 +43,10 @@ void BuyMenuEngine::play(Player* player)
           done = true;
           break;
         }
-        if(keystate[SDL_SCANCODE_DOWN]) menu.incrIcon();
-        if(keystate[SDL_SCANCODE_UP]) menu.decrIcon();
+        if(keystate[SDL_SCANCODE_DOWN] || keystate[SDL_SCANCODE_S])
+          menu.incrIcon();
+        if(keystate[SDL_SCANCODE_UP] || keystate[SDL_SCANCODE_W])
+          menu.decrIcon();
         if(keystate[SDL_SCANCODE_RETURN])
         {
           menu.lightOn();

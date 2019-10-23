@@ -149,7 +149,7 @@ void SmartSprite::update(Uint32 ticks)
     if(currentMode == EVADE)
     {
       if(distanceToEnemy > safeDistance)
-      currentMode = ATTACK;
+        currentMode = ATTACK;
       else
       {
         if(x < ex)
@@ -164,14 +164,35 @@ void SmartSprite::update(Uint32 ticks)
     }
     else if(currentMode == ATTACK)
     {
+      if(getX() > getPlayerPos()[0] && abs(getX() - getPlayerPos()[0]) <= 10)
+      {
+        setVelocityX(-std::abs(getVelocityX()));
+        return;
+      }
       if(getX() > getPlayerPos()[0])
         setVelocityX(-std::abs(getVelocityX()));
+      if(getX() < getPlayerPos()[0] && abs(getX() - getPlayerPos()[0]) <= 10)
+      {
+        setVelocityX(std::abs(getVelocityX()));
+        return;
+      }
       if(getX() < getPlayerPos()[0])
         setVelocityX(std::abs(getVelocityX()));
+      if(getY() > getPlayerPos()[1] && abs(getY() - getPlayerPos()[1]) <= 10)
+      {
+        setVelocityY(-std::abs(getVelocityY()));
+        return;
+      }
       if(getY() > getPlayerPos()[1])
         setVelocityY(-std::abs(getVelocityY()));
+      if(getY() > getPlayerPos()[1] && abs(getY() - getPlayerPos()[1]) <= 10)
+      {
+        setVelocityY(std::abs(getVelocityY()));
+        return;
+      }
       if(getY() < getPlayerPos()[1])
         setVelocityY(std::abs(getVelocityY()));
+
     }
   }
 }

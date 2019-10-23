@@ -24,9 +24,9 @@
 </back>
 
 <wave1>
-  <total>5</total>
+  <total>10</total>
   <slowNum>5</slowNum>
-  <fastNum>0</fastNum>
+  <fastNum>5</fastNum>
 </wave1>
 <wave2>
   <total>10</total>
@@ -123,7 +123,7 @@
   <file>assets/Zombie.png</file>
   <lives>3</lives>
   <startPos x="640" y="-100"/>
-  <velocity x="80" y="80"/>
+  <velocity x="150" y="150"/>
   <minBound x="0" y="0"/>
   <maxBound x="1920" y="1080"/>
   <frames>16</frames>
@@ -132,6 +132,7 @@
   <upFrames>4</upFrames>
   <downFrames>4</downFrames>
   <frameInterval>200</frameInterval>
+  <explosionInterval>200</explosionInterval>
   <twoWay>true</twoWay>
   <imageWidth>62</imageWidth>
   <imageHeight>62</imageHeight>
@@ -217,14 +218,14 @@
   <noOfOptions>5</noOfOptions>
   <loc x="0" y="0"/>
   <msg x="600" y="150"/>
-  <optionLoc x="600" y="250"/>
+  <optionLoc x="550" y="225"/>
   <color r="0" g="0" b="0" a="255"/>
   <backColor r="255" g="0" b="0" a="255"/>
-  <option0>Purchase Pistol Ammo</option0>
-  <option1>Purchase Shotgun</option1>
-  <option2>Purchase Shotgun Ammo</option2>
-  <option3>Purchase Assault Rifle</option3>
-  <option4>Purchase Assault Rifle Ammo</option4>
+  <option0>$100 - Purchase Pistol Ammo</option0>
+  <option1>$500 - Purchase Shotgun</option1>
+  <option2>$200 - Purchase Shotgun Ammo</option2>
+  <option3>$1000 - Purchase Assault Rifle</option3>
+  <option4>$500 - Purchase Assault Rifle Ammo</option4>
   <spaces>65</spaces>
 </BuyMenu>
 

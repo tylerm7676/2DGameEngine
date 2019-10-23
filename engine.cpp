@@ -47,23 +47,50 @@ Engine::Engine() :
     + GameData::getInstance().getXmlInt("wave10/total")),
   waveNum(0),
   wave1(GameData::getInstance().getXmlInt("wave1/total")),
+  wave1Slow(GameData::getInstance().getXmlInt("wave1/slowNum")),
+  wave1Fast(GameData::getInstance().getXmlInt("wave1/fastNum")),
   wave2(GameData::getInstance().getXmlInt("wave2/total")),
+  wave2Slow(GameData::getInstance().getXmlInt("wave1/slowNum")),
+  wave2Fast(GameData::getInstance().getXmlInt("wave1/fastNum")),
   wave3(GameData::getInstance().getXmlInt("wave3/total")),
+  wave3Slow(GameData::getInstance().getXmlInt("wave1/slowNum")),
+  wave3Fast(GameData::getInstance().getXmlInt("wave1/fastNum")),
   wave4(GameData::getInstance().getXmlInt("wave4/total")),
+  wave4Slow(GameData::getInstance().getXmlInt("wave1/slowNum")),
+  wave4Fast(GameData::getInstance().getXmlInt("wave1/fastNum")),
   wave5(GameData::getInstance().getXmlInt("wave5/total")),
+  wave5Slow(GameData::getInstance().getXmlInt("wave1/slowNum")),
+  wave5Fast(GameData::getInstance().getXmlInt("wave1/fastNum")),
   wave6(GameData::getInstance().getXmlInt("wave6/total")),
+  wave6Slow(GameData::getInstance().getXmlInt("wave1/slowNum")),
+  wave6Fast(GameData::getInstance().getXmlInt("wave1/fastNum")),
   wave7(GameData::getInstance().getXmlInt("wave7/total")),
+  wave7Slow(GameData::getInstance().getXmlInt("wave1/slowNum")),
+  wave7Fast(GameData::getInstance().getXmlInt("wave1/fastNum")),
   wave8(GameData::getInstance().getXmlInt("wave8/total")),
+  wave8Slow(GameData::getInstance().getXmlInt("wave1/slowNum")),
+  wave8Fast(GameData::getInstance().getXmlInt("wave1/fastNum")),
   wave9(GameData::getInstance().getXmlInt("wave9/total")),
-  wave10(GameData::getInstance().getXmlInt("wave10/total"))
+  wave9Slow(GameData::getInstance().getXmlInt("wave1/slowNum")),
+  wave9Fast(GameData::getInstance().getXmlInt("wave1/fastNum")),
+  wave10(GameData::getInstance().getXmlInt("wave10/total")),
+  wave10Slow(GameData::getInstance().getXmlInt("wave1/slowNum")),
+  wave10Fast(GameData::getInstance().getXmlInt("wave1/fastNum"))
   //lights()
   {
     menuEngine.play(waveNum, player);
     waveNum++;
     smartSprites.reserve(numZombies);
-    for(int i = 0; i < wave1; i++)
+    for(int i = 0; i < wave1Slow; i++)
     {
       smartSprites.push_back(new SmartSprite("Zombie", player));
+      smartSprites.back()->randomizeVelocity();
+      smartSprites.back()->randomizePosition();
+      player->attach(smartSprites[i]);
+    }
+    for(int i = wave1Slow; i < wave1; i++)
+    {
+      smartSprites.push_back(new SmartSprite("FastZombie", player));
       smartSprites.back()->randomizeVelocity();
       smartSprites.back()->randomizePosition();
       player->attach(smartSprites[i]);
@@ -95,10 +122,19 @@ void Engine::draw()
   else if(smartSprites.size() <= 0 && waveNum == 1)
   {
     waveNum++;
+    clock.pause();
     menuEngine.play(waveNum, player);
-    for(int i = 0; i < wave2; i++)
+    clock.unpause();
+    for(int i = 0; i < wave2Slow; i++)
     {
       smartSprites.push_back(new SmartSprite("Zombie", player));
+      smartSprites.back()->randomizeVelocity();
+      smartSprites.back()->randomizePosition();
+      player->attach(smartSprites[i]);
+    }
+    for(int i = wave2Slow; i < wave2Fast; i++)
+    {
+      smartSprites.push_back(new SmartSprite("FastZombie", player));
       smartSprites.back()->randomizeVelocity();
       smartSprites.back()->randomizePosition();
       player->attach(smartSprites[i]);
@@ -107,10 +143,19 @@ void Engine::draw()
   else if(smartSprites.size() <= 0 && waveNum == 2)
   {
     waveNum++;
+    clock.pause();
     menuEngine.play(waveNum, player);
-    for(int i = 0; i < wave3; i++)
+    clock.unpause();
+    for(int i = 0; i < wave3Slow; i++)
     {
       smartSprites.push_back(new SmartSprite("Zombie", player));
+      smartSprites.back()->randomizeVelocity();
+      smartSprites.back()->randomizePosition();
+      player->attach(smartSprites[i]);
+    }
+    for(int i = wave3Slow; i < wave3Fast; i++)
+    {
+      smartSprites.push_back(new SmartSprite("FastZombie", player));
       smartSprites.back()->randomizeVelocity();
       smartSprites.back()->randomizePosition();
       player->attach(smartSprites[i]);
@@ -119,10 +164,19 @@ void Engine::draw()
   else if(smartSprites.size() <= 0 && waveNum == 3)
   {
     waveNum++;
+    clock.pause();
     menuEngine.play(waveNum, player);
-    for(int i = 0; i < wave4; i++)
+    clock.unpause();
+    for(int i = 0; i < wave4Slow; i++)
     {
       smartSprites.push_back(new SmartSprite("Zombie", player));
+      smartSprites.back()->randomizeVelocity();
+      smartSprites.back()->randomizePosition();
+      player->attach(smartSprites[i]);
+    }
+    for(int i = wave4Slow; i < wave4Fast; i++)
+    {
+      smartSprites.push_back(new SmartSprite("FastZombie", player));
       smartSprites.back()->randomizeVelocity();
       smartSprites.back()->randomizePosition();
       player->attach(smartSprites[i]);
@@ -131,10 +185,19 @@ void Engine::draw()
   else if(smartSprites.size() <= 0 && waveNum == 4)
   {
     waveNum++;
+    clock.pause();
     menuEngine.play(waveNum, player);
-    for(int i = 0; i < wave5; i++)
+    clock.unpause();
+    for(int i = 0; i < wave5Slow; i++)
     {
       smartSprites.push_back(new SmartSprite("Zombie", player));
+      smartSprites.back()->randomizeVelocity();
+      smartSprites.back()->randomizePosition();
+      player->attach(smartSprites[i]);
+    }
+    for(int i = wave5Slow; i < wave5Fast; i++)
+    {
+      smartSprites.push_back(new SmartSprite("FastZombie", player));
       smartSprites.back()->randomizeVelocity();
       smartSprites.back()->randomizePosition();
       player->attach(smartSprites[i]);
@@ -143,10 +206,19 @@ void Engine::draw()
   else if(smartSprites.size() <= 0 && waveNum == 5)
   {
     waveNum++;
+    clock.pause();
     menuEngine.play(waveNum, player);
-    for(int i = 0; i < wave6; i++)
+    clock.unpause();
+    for(int i = 0; i < wave6Slow; i++)
     {
       smartSprites.push_back(new SmartSprite("Zombie", player));
+      smartSprites.back()->randomizeVelocity();
+      smartSprites.back()->randomizePosition();
+      player->attach(smartSprites[i]);
+    }
+    for(int i = wave6Slow; i < wave6Fast; i++)
+    {
+      smartSprites.push_back(new SmartSprite("FastZombie", player));
       smartSprites.back()->randomizeVelocity();
       smartSprites.back()->randomizePosition();
       player->attach(smartSprites[i]);
@@ -155,10 +227,19 @@ void Engine::draw()
   else if(smartSprites.size() <= 0 && waveNum == 6)
   {
     waveNum++;
+    clock.pause();
     menuEngine.play(waveNum, player);
-    for(int i = 0; i < wave7; i++)
+    clock.unpause();
+    for(int i = 0; i < wave7Slow; i++)
     {
       smartSprites.push_back(new SmartSprite("Zombie", player));
+      smartSprites.back()->randomizeVelocity();
+      smartSprites.back()->randomizePosition();
+      player->attach(smartSprites[i]);
+    }
+    for(int i = wave7Slow; i < wave7Fast; i++)
+    {
+      smartSprites.push_back(new SmartSprite("FastZombie", player));
       smartSprites.back()->randomizeVelocity();
       smartSprites.back()->randomizePosition();
       player->attach(smartSprites[i]);
@@ -167,10 +248,19 @@ void Engine::draw()
   else if(smartSprites.size() <= 0 && waveNum == 7)
   {
     waveNum++;
+    clock.pause();
     menuEngine.play(waveNum, player);
-    for(int i = 0; i < wave8; i++)
+    clock.unpause();
+    for(int i = 0; i < wave8Slow; i++)
     {
       smartSprites.push_back(new SmartSprite("Zombie", player));
+      smartSprites.back()->randomizeVelocity();
+      smartSprites.back()->randomizePosition();
+      player->attach(smartSprites[i]);
+    }
+    for(int i = wave8Slow; i < wave8Fast; i++)
+    {
+      smartSprites.push_back(new SmartSprite("FastZombie", player));
       smartSprites.back()->randomizeVelocity();
       smartSprites.back()->randomizePosition();
       player->attach(smartSprites[i]);
@@ -179,10 +269,19 @@ void Engine::draw()
   else if(smartSprites.size() <= 0 && waveNum == 8)
   {
     waveNum++;
+    clock.pause();
     menuEngine.play(waveNum, player);
-    for(int i = 0; i < wave9; i++)
+    clock.unpause();
+    for(int i = 0; i < wave9Slow; i++)
     {
       smartSprites.push_back(new SmartSprite("Zombie", player));
+      smartSprites.back()->randomizeVelocity();
+      smartSprites.back()->randomizePosition();
+      player->attach(smartSprites[i]);
+    }
+    for(int i = wave9Slow; i < wave9Fast; i++)
+    {
+      smartSprites.push_back(new SmartSprite("FastZombie", player));
       smartSprites.back()->randomizeVelocity();
       smartSprites.back()->randomizePosition();
       player->attach(smartSprites[i]);
@@ -191,10 +290,19 @@ void Engine::draw()
   else if(smartSprites.size() <= 0 && waveNum == 9)
   {
     waveNum++;
+    clock.pause();
     menuEngine.play(waveNum, player);
-    for(int i = 0; i < wave10; i++)
+    clock.unpause();
+    for(int i = 0; i < wave10Slow; i++)
     {
       smartSprites.push_back(new SmartSprite("Zombie", player));
+      smartSprites.back()->randomizeVelocity();
+      smartSprites.back()->randomizePosition();
+      player->attach(smartSprites[i]);
+    }
+    for(int i = wave10Slow; i < wave10Fast; i++)
+    {
+      smartSprites.push_back(new SmartSprite("FastZombie", player));
       smartSprites.back()->randomizeVelocity();
       smartSprites.back()->randomizePosition();
       player->attach(smartSprites[i]);
@@ -202,6 +310,7 @@ void Engine::draw()
   }
   else if(smartSprites.size() <= 0 && waveNum == 10)
   {
+    clock.pause();
     hudMain.setVisibility(false);
     healthBar.setVisibility(false);
     hudObjPool.setVisibility(false);
@@ -266,6 +375,13 @@ void Engine::checkForCollisions()
   }
 }
 
+void Engine::pause()
+{
+  clock.pause();
+  menuEngine.play(waveNum, player);
+  clock.unpause();
+}
+
 bool Engine::play()
 {
   SDL_Event event;
@@ -284,18 +400,7 @@ bool Engine::play()
       if(event.type == SDL_KEYDOWN)
       {
         if(keystate[SDL_SCANCODE_ESCAPE])
-        {
-          done = true;
-          break;
-        }
-        if(keystate[SDL_SCANCODE_P])
-        {
-          if (clock.isPaused())
-            clock.unpause();
-          else
-            clock.pause();
-          sound.toggleMusic();
-        }
+          pause();
         if(keystate[SDL_SCANCODE_F1])
         {
           hudMain.setVisibility(!hudMain.isVisible());
@@ -312,7 +417,7 @@ bool Engine::play()
           player->setReload();
         if(keystate[SDL_SCANCODE_M])
           sound.toggleMusic();
-        if(keystate[SDL_SCANCODE_X])
+        if(keystate[SDL_SCANCODE_J])
         {
           healthBar.reset();
           healthBar.setVisibility(false);

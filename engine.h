@@ -2,7 +2,6 @@
 #include <SDL.h>
 #include "ioMod.h"
 #include "clock.h"
-#include "hudMain.h"
 #include "hudObjPool.h"
 #include "gameOver.h"
 #include "world.h"
@@ -24,7 +23,6 @@ class Engine
     const RenderContext& rc;
     const IoMod& io;
     Clock& clock;
-    HudMain& hudMain;
     HealthBar& healthBar;
     HudObjPool& hudObjPool;
     GameOver& gameOver;

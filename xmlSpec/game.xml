@@ -203,13 +203,13 @@
   <noOfOptions>3</noOfOptions>
   <loc x="0" y="0"/>
   <msg x="600" y="150"/>
-  <optionLoc x="640" y="275"/>
+  <optionLoc x="600" y="190"/>
   <color r="0" g="0" b="0" a="255"/>
   <backColor r="255" g="0" b="0" a="255"/>
   <option0>Start</option0>
   <option1>Buy Weapons</option1>
   <option2>Controls</option2>
-  <spaces>100</spaces>
+  <spaces>110</spaces>
 </Menu>
 
 <BuyMenu>
@@ -218,7 +218,7 @@
   <noOfOptions>5</noOfOptions>
   <loc x="0" y="0"/>
   <msg x="600" y="150"/>
-  <optionLoc x="550" y="225"/>
+  <optionLoc x="550" y="215"/>
   <color r="0" g="0" b="0" a="255"/>
   <backColor r="255" g="0" b="0" a="255"/>
   <option0>$100 - Purchase Pistol Ammo</option0>
@@ -283,13 +283,13 @@
 <healthBar>
   <width>700</width>
   <height>110</height>
-  <position x="275" y="11"/>
+  <position x="25" y="11"/>
   <backgroundColor r="0" g="0" b="0" a="130"/>
   <outlineColor r="255" g="0" b="0" a="255"/>
   <textColor r="255" g="0" b="0" a="255"/>
   <barWidth>650</barWidth>
   <barHeight>20</barHeight>
-  <barPosition x="300" y="60"/>
+  <barPosition x="50" y="60"/>
   <barColor r="255" g="0" b="0" a="255"/>
   <backColor r="0" g="0" b="0" a="130"/>
 </healthBar>

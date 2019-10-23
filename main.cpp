@@ -13,7 +13,6 @@
       keepPlaying = engine.play();
       Clock::getInstance().startClock();
       SDL_Sound::getInstance().startMusic();
-      HudMain::getInstance().setVisibility(false);
       HudObjPool::getInstance().setVisibility(false);
     }
   }

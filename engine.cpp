@@ -23,7 +23,6 @@ Engine::Engine() :
   rc(RenderContext::getInstance()),
   io(IoMod::getInstance()),
   clock(Clock::getInstance()),
-  hudMain(HudMain::getInstance()),
   healthBar(HealthBar::getInstance()),
   hudObjPool(HudObjPool::getInstance()),
   gameOver(GameOver::getInstance()),
@@ -107,13 +106,11 @@ void Engine::draw()
   player->draw();
   //lights.draw();
   viewport.draw();
-  hudMain.draw();
   hudObjPool.draw(smartSprites.size(), waveNum, player->getAmmoInClip(),
     player->getAmmoTotal(), player->getMoney(), player->getPoints());
   healthBar.draw(player->getWeapon());
   if(player->getLivesLeft() <= 0)
   {
-    hudMain.setVisibility(false);
     healthBar.setVisibility(false);
     hudObjPool.setVisibility(false);
     gameOver.setVisibility(true);
@@ -311,7 +308,6 @@ void Engine::draw()
   else if(smartSprites.size() <= 0 && waveNum == 10)
   {
     clock.pause();
-    hudMain.setVisibility(false);
     healthBar.setVisibility(false);
     hudObjPool.setVisibility(false);
     gameOver.setVisibility(true);
@@ -388,7 +384,6 @@ bool Engine::play()
   const Uint8* keystate;
   bool done = false;
   Uint32 ticks = clock.getElapsedTicks();
-  hudMain.setVisibility(true);
   healthBar.setVisibility(true);
   hudObjPool.setVisibility(true);
   while (!done)
@@ -403,7 +398,6 @@ bool Engine::play()
           pause();
         if(keystate[SDL_SCANCODE_F1])
         {
-          hudMain.setVisibility(!hudMain.isVisible());
           healthBar.setVisibility(!healthBar.isVisible());
           hudObjPool.setVisibility(!hudObjPool.isVisible());
         }

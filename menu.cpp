@@ -131,17 +131,17 @@ void Menu::draw(int wave) const
 {
   drawBackground();
   if(wave == 0)
-  {
     io.writeText("Zombies Menu", hudFrame.x + 250, hudFrame.y + 125, true);
-  }
   else
     io.writeText("Wave " + std::to_string(wave), hudFrame.x + 425, hudFrame.y + 125, true);
-  int space = spaces;
-  for(const std::string& option : options)
-  {
-    io.writeText(option, optionLoc[0], optionLoc[1] + space);
-    space += spaces;
-  }
+
+  int yLoc = 225;
+  io.writeText("Start", 640, yLoc + spaces);
+  yLoc += spaces;
+  io.writeText("Buy Weapons", 640, yLoc + spaces);
+  yLoc += spaces;
+  io.writeText("Controls", 640, yLoc + spaces);
+
   // We have to draw the clickOn & clickOff relative to the screen,
   // and we don't want to offset by the location of the viewprot:
   clicks[currentClick].getImage()->draw(0, 0, clickX, clickY);

@@ -51,16 +51,20 @@ class Player : public Drawable
     int shotgunAmmoInClip;
     int shotgunAmmoTotal;
     int shotgunClip;
+    int shotgunCost;
     int shotgunAmmoCost;
     int shotgunAmount;
     int assaultRifleAmmoInClip;
     int assaultRifleAmmoTotal;
     int assaultRifleClip;
+    int assaultRifleCost;
     int assaultRifleAmmoCost;
     int assaultRifleAmount;
     bool pistolIsReloading;
     bool shotgunIsReloading;
     bool assaultRifleIsReloading;
+    bool shotgunPurchased;
+    bool assaultRiflePurchased;
     int money;
     int points;
     Sound sound;
@@ -106,7 +110,9 @@ class Player : public Drawable
     int getMoney() { return money; }
     int getPoints() { return points; }
     bool purchasePistolAmmo();
+    bool purchaseShotgun();
     bool purchaseShotgunAmmo();
+    bool purchaseAssaultRifle();
     bool purchaseAssaultRifleAmmo();
 };
 

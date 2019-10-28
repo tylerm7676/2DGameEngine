@@ -67,8 +67,17 @@ void BuyMenuEngine::play(Player* player)
           }
           if(optionChoice == 1)
           {
-            done = true;
-            break;
+            result = player->purchaseShotgun();
+            if(!result)
+            {
+              std::cout << "Shotgun not purchased\n";
+            }
+            else
+            {
+              std::cout << "Shotgun purchased\n";
+              done = true;
+              break;
+            }
           }
           if(optionChoice == 2)
           {
@@ -86,8 +95,17 @@ void BuyMenuEngine::play(Player* player)
           }
           if(optionChoice == 3)
           {
-            done = true;
-            break;
+            result = player->purchaseAssaultRifle();
+            if(!result)
+            {
+              std::cout << "Assault Rifle not purchased\n";
+            }
+            else
+            {
+              std::cout << "Assault Rifle purchased\n";
+              done = true;
+              break;
+            }
           }
           if(optionChoice == 4)
           {

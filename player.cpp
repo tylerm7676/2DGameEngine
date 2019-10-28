@@ -171,16 +171,20 @@ Player::Player(const std::string& name) :
   shotgunAmmoInClip(0),
   shotgunAmmoTotal(0),
   shotgunClip(GameData::getInstance().getXmlInt(projectileName+"/shotgunClip")),
+  shotgunCost(GameData::getInstance().getXmlInt(projectileName+"/shotgunCost")),
   shotgunAmmoCost(GameData::getInstance().getXmlInt(projectileName+"/shotgunAmmoCost")),
   shotgunAmount(GameData::getInstance().getXmlInt(projectileName+"/shotgunAmount")),
   assaultRifleAmmoInClip(0),
   assaultRifleAmmoTotal(0),
   assaultRifleClip(GameData::getInstance().getXmlInt(projectileName+"/assaultRifleClip")),
+  assaultRifleCost(GameData::getInstance().getXmlInt(projectileName+"/assaultRifleCost")),
   assaultRifleAmmoCost(GameData::getInstance().getXmlInt(projectileName+"/assaultRifleAmmoCost")),
   assaultRifleAmount(GameData::getInstance().getXmlInt(projectileName+"/assaultRifleAmount")),
   pistolIsReloading(false),
   shotgunIsReloading(false),
   assaultRifleIsReloading(false),
+  shotgunPurchased(false),
+  assaultRiflePurchased(false),
   money(0),
   points(0),
   sound()
@@ -541,22 +545,31 @@ void Player::cycleLeft()
 {
   if(pistolIsReloading || shotgunIsReloading || assaultRifleIsReloading)
     return;
-  if(pistol)
+  if(pistol && !shotgunPurchased && !assaultRiflePurchased)
+    return;
+  if(pistol && shotgunPurchased && !assaultRiflePurchased)
   {
     pistol = false;
-    shotgun = false;
+    shotgun = true;
+  }
+  else if(pistol && assaultRiflePurchased)
+  {
+    pistol = false;
     assaultRifle = true;
   }
   else if(shotgun)
   {
     pistol = true;
     shotgun = false;
+  }
+  else if(assaultRifle && shotgunPurchased)
+  {
+    shotgun = true;
     assaultRifle = false;
   }
-  else if(assaultRifle)
+  else if(assaultRifle && !shotgunPurchased)
   {
-    pistol = false;
-    shotgun = true;
+    pistol = true;
     assaultRifle = false;
   }
 }
@@ -565,22 +578,31 @@ void Player::cycleRight()
 {
   if(pistolIsReloading || shotgunIsReloading || assaultRifleIsReloading)
     return;
-  if(pistol)
+  if(pistol && !shotgunPurchased && !assaultRiflePurchased)
+    return;
+  if(pistol && shotgunPurchased)
   {
     pistol = false;
     shotgun = true;
-    assaultRifle = false;
   }
-  else if(shotgun)
+  else if(pistol && !shotgunPurchased && assaultRiflePurchased)
   {
     pistol = false;
+    assaultRifle = true;
+  }
+  else if(shotgun && assaultRiflePurchased)
+  {
     shotgun = false;
     assaultRifle = true;
+  }
+  else if(shotgun && !assaultRiflePurchased)
+  {
+    shotgun = false;
+    pistol = true;
   }
   else if(assaultRifle)
   {
     pistol = true;
-    shotgun = false;
     assaultRifle = false;
   }
 }
@@ -629,8 +651,24 @@ bool Player::purchasePistolAmmo()
   return false;
 }
 
+bool Player::purchaseShotgun()
+{
+  if(shotgunPurchased)
+    return false;
+  if(money >= shotgunCost)
+  {
+    shotgunAmmoTotal += shotgunAmount;
+    money -= shotgunCost;
+    shotgunPurchased = true;
+    return true;
+  }
+  return false;
+}
+
 bool Player::purchaseShotgunAmmo()
 {
+  if(!shotgunPurchased)
+    return false;
   if(money >= shotgunAmmoCost)
   {
     shotgunAmmoTotal += shotgunAmount;
@@ -640,8 +678,24 @@ bool Player::purchaseShotgunAmmo()
   return false;
 }
 
+bool Player::purchaseAssaultRifle()
+{
+  if(assaultRiflePurchased)
+    return false;
+  if(money >= assaultRifleCost)
+  {
+    assaultRifleAmmoTotal += assaultRifleAmount;
+    money -= assaultRifleCost;
+    assaultRiflePurchased = true;
+    return true;
+  }
+  return false;
+}
+
 bool Player::purchaseAssaultRifleAmmo()
 {
+  if(!assaultRiflePurchased)
+    return false;
   if(money >= assaultRifleAmmoCost)
   {
     assaultRifleAmmoTotal += assaultRifleAmount;

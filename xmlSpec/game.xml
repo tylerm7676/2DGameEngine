@@ -24,9 +24,9 @@
 </back>
 
 <wave1>
-  <total>10</total>
+  <total>5</total>
   <slowNum>5</slowNum>
-  <fastNum>5</fastNum>
+  <fastNum>0</fastNum>
 </wave1>
 <wave2>
   <total>10</total>
@@ -121,9 +121,9 @@
 
 <FastZombie>
   <file>assets/Zombie.png</file>
-  <lives>3</lives>
+  <lives>1</lives>
   <startPos x="640" y="-100"/>
-  <velocity x="150" y="150"/>
+  <velocity x="130" y="130"/>
   <minBound x="0" y="0"/>
   <maxBound x="1920" y="1080"/>
   <frames>16</frames>
@@ -138,9 +138,32 @@
   <imageHeight>62</imageHeight>
   <scale>1</scale>
   <slowDownFactor>0.30</slowDownFactor>
-  <safeDistance>400</safeDistance>
+  <safeDistance>300</safeDistance>
   <transparency>false</transparency>
 </FastZombie>
+
+<Boss>
+  <file>assets/Zombie.png</file>
+  <lives>100</lives>
+  <startPos x="640" y="-100"/>
+  <velocity x="110" y="110"/>
+  <minBound x="0" y="0"/>
+  <maxBound x="1920" y="1080"/>
+  <frames>16</frames>
+  <leftFrames>4</leftFrames>
+  <rightFrames>4</rightFrames>
+  <upFrames>4</upFrames>
+  <downFrames>4</downFrames>
+  <frameInterval>200</frameInterval>
+  <explosionInterval>200</explosionInterval>
+  <twoWay>true</twoWay>
+  <imageWidth>62</imageWidth>
+  <imageHeight>62</imageHeight>
+  <scale>4</scale>
+  <slowDownFactor>0.30</slowDownFactor>
+  <safeDistance>100</safeDistance>
+  <transparency>false</transparency>
+</Boss>
 
 <Bullet>
   <file>assets/bullet.png</file>
@@ -171,8 +194,10 @@
   <assaultRifleReloadInterval>1500</assaultRifleReloadInterval>
   <pistolAmmoCost>100</pistolAmmoCost>
   <pistolAmount>70</pistolAmount>
+  <shotgunCost>500</shotgunCost>
   <shotgunAmmoCost>200</shotgunAmmoCost>
   <shotgunAmount>50</shotgunAmount>
+  <assaultRifleCost>1000</assaultRifleCost>
   <assaultRifleAmmoCost>500</assaultRifleAmmoCost>
   <assaultRifleAmount>300</assaultRifleAmount>
   <maxDistance>1000</maxDistance>

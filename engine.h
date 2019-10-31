@@ -34,11 +34,9 @@ class Engine
     std::vector<SmartSprite*> smartSprites;
     CollisionStrategy* collisionStrategy;
     MenuEngine menuEngine;
-    int waveNum, wave1, wave1Slow, wave1Fast, wave2, wave2Slow, wave2Fast,
-    wave3, wave3Slow, wave3Fast, wave4, wave4Slow, wave4Fast, wave5, wave5Slow,
-    wave5Fast, wave6, wave6Slow, wave6Fast, wave7, wave7Slow, wave7Fast, wave8,
-    wave8Slow, wave8Fast, wave9, wave9Slow, wave9Fast, wave10, wave10Slow, wave10Fast;
-    //Lights lights;
+    int numZombies;
+    int waveNum, wave1, wave2, wave3, wave4, wave5, wave6, wave7, wave8, wave9, wave10;
+    Lights lights;
 
     void draw();
     void update(Uint32);
@@ -49,6 +47,7 @@ class Engine
     Engine ();
     ~Engine ();
     bool play();
+
 
     Engine(const Engine&) = delete;
     Engine& operator=(const Engine&) = delete;

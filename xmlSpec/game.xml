@@ -110,7 +110,7 @@
   <file>assets/Zombie.png</file>
   <lives>1</lives>
   <startPos x="640" y="-100"/>
-  <velocity x="80" y="80"/>
+  <velocity x="100" y="100"/>
   <minBound x="0" y="0"/>
   <maxBound x="1920" y="1080"/>
   <frames>16</frames>

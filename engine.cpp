@@ -34,38 +34,19 @@ Engine::Engine() :
   smartSprites(),
   collisionStrategy(new PerPixelCollisionStrategy),
   menuEngine(),
+  numZombies(50),
   waveNum(0),
   wave1(GameData::getInstance().getXmlInt("wave1/total")),
-  wave1Slow(GameData::getInstance().getXmlInt("wave1/slowNum")),
-  wave1Fast(GameData::getInstance().getXmlInt("wave1/fastNum")),
   wave2(GameData::getInstance().getXmlInt("wave2/total")),
-  wave2Slow(GameData::getInstance().getXmlInt("wave2/slowNum")),
-  wave2Fast(GameData::getInstance().getXmlInt("wave2/fastNum")),
   wave3(GameData::getInstance().getXmlInt("wave3/total")),
-  wave3Slow(GameData::getInstance().getXmlInt("wave3/slowNum")),
-  wave3Fast(GameData::getInstance().getXmlInt("wave3/fastNum")),
   wave4(GameData::getInstance().getXmlInt("wave4/total")),
-  wave4Slow(GameData::getInstance().getXmlInt("wave4/slowNum")),
-  wave4Fast(GameData::getInstance().getXmlInt("wave4/fastNum")),
   wave5(GameData::getInstance().getXmlInt("wave5/total")),
-  wave5Slow(GameData::getInstance().getXmlInt("wave5/slowNum")),
-  wave5Fast(GameData::getInstance().getXmlInt("wave5/fastNum")),
   wave6(GameData::getInstance().getXmlInt("wave6/total")),
-  wave6Slow(GameData::getInstance().getXmlInt("wave6/slowNum")),
-  wave6Fast(GameData::getInstance().getXmlInt("wave6/fastNum")),
   wave7(GameData::getInstance().getXmlInt("wave7/total")),
-  wave7Slow(GameData::getInstance().getXmlInt("wave7/slowNum")),
-  wave7Fast(GameData::getInstance().getXmlInt("wave7/fastNum")),
   wave8(GameData::getInstance().getXmlInt("wave8/total")),
-  wave8Slow(GameData::getInstance().getXmlInt("wave8/slowNum")),
-  wave8Fast(GameData::getInstance().getXmlInt("wave8/fastNum")),
   wave9(GameData::getInstance().getXmlInt("wave9/total")),
-  wave9Slow(GameData::getInstance().getXmlInt("wave9/slowNum")),
-  wave9Fast(GameData::getInstance().getXmlInt("wave9/fastNum")),
   wave10(GameData::getInstance().getXmlInt("wave10/total")),
-  wave10Slow(GameData::getInstance().getXmlInt("wave10/slowNum")),
-  wave10Fast(GameData::getInstance().getXmlInt("wave10/fastNum"))
-  //lights()
+  lights()
   {
     menuEngine.play(waveNum, player);
     waveNum++;
@@ -86,7 +67,7 @@ void Engine::draw()
   for(const SmartSprite* s : smartSprites)
     s->draw();
   player->draw();
-  //lights.draw();
+  lights.draw();
   viewport.draw();
   hudObjPool.draw(smartSprites.size(), waveNum, player->getAmmoInClip(),
     player->getAmmoTotal(), player->getMoney(), player->getPoints());
@@ -132,7 +113,7 @@ void Engine::draw()
     clock.pause();
     menuEngine.play(waveNum, player);
     clock.unpause();
-    for(int i = 0; i < wave4Slow; i++)
+    for(int i = 0; i < wave4; i++)
     {
       smartSprites.push_back(new SmartSprite("Zombie", player));
       smartSprites.back()->randomizeVelocity();
@@ -146,7 +127,7 @@ void Engine::draw()
     clock.pause();
     menuEngine.play(waveNum, player);
     clock.unpause();
-    for(int i = 0; i < wave5Slow; i++)
+    for(int i = 0; i < wave5; i++)
     {
       smartSprites.push_back(new SmartSprite("Zombie", player));
       smartSprites.back()->randomizeVelocity();
@@ -160,7 +141,7 @@ void Engine::draw()
     clock.pause();
     menuEngine.play(waveNum, player);
     clock.unpause();
-    for(int i = 0; i < wave6Slow; i++)
+    for(int i = 0; i < wave6; i++)
     {
       smartSprites.push_back(new SmartSprite("Zombie", player));
       smartSprites.back()->randomizeVelocity();
@@ -174,7 +155,7 @@ void Engine::draw()
     clock.pause();
     menuEngine.play(waveNum, player);
     clock.unpause();
-    for(int i = 0; i < wave7Slow; i++)
+    for(int i = 0; i < wave7; i++)
     {
       smartSprites.push_back(new SmartSprite("Zombie", player));
       smartSprites.back()->randomizeVelocity();
@@ -188,7 +169,7 @@ void Engine::draw()
     clock.pause();
     menuEngine.play(waveNum, player);
     clock.unpause();
-    for(int i = 0; i < wave8Slow; i++)
+    for(int i = 0; i < wave8; i++)
     {
       smartSprites.push_back(new SmartSprite("Zombie", player));
       smartSprites.back()->randomizeVelocity();
@@ -202,7 +183,7 @@ void Engine::draw()
     clock.pause();
     menuEngine.play(waveNum, player);
     clock.unpause();
-    for(int i = 0; i < wave9Slow; i++)
+    for(int i = 0; i < wave9; i++)
     {
       smartSprites.push_back(new SmartSprite("Zombie", player));
       smartSprites.back()->randomizeVelocity();
@@ -216,7 +197,7 @@ void Engine::draw()
     clock.pause();
     menuEngine.play(waveNum, player);
     clock.unpause();
-    for(int i = 0; i < wave10Slow; i++)
+    for(int i = 0; i < wave10; i++)
     {
       smartSprites.push_back(new SmartSprite("Zombie", player));
       smartSprites.back()->randomizeVelocity();
@@ -225,17 +206,6 @@ void Engine::draw()
     }
   }
   else if(smartSprites.size() <= 0 && waveNum == 10)
-  {
-    waveNum++;
-    clock.pause();
-    menuEngine.play(waveNum, player);
-    clock.unpause();
-    smartSprites.push_back(new SmartSprite("Boss", player));
-    smartSprites.back()->randomizeVelocity();
-    smartSprites.back()->randomizePosition();
-    player->attach(smartSprites[0]);
-  }
-  else if(smartSprites.size() <= 0 && waveNum == 11)
   {
     clock.pause();
     healthBar.setVisibility(false);
@@ -253,7 +223,7 @@ void Engine::update(Uint32 ticks)
   for(SmartSprite* s : smartSprites)
     s->update(ticks);
   world.update();
-  //lights.update();
+  lights.update();
   viewport.update();
 }
 
@@ -284,18 +254,10 @@ void Engine::checkForCollisions()
     }
     if((*it)->hasCollided() && (!((*it)->isColliding())))
     {
-      SmartSprite* hitSmartSprite = *it;
-      hitSmartSprite->loseLife();
-      hitSmartSprite->setCollided(false);
-      hitSmartSprite->randomizeVelocity();
-      hitSmartSprite->setVelocity(Vector2f(80, 80));
-      if(hitSmartSprite->getNumLives() <= 0)
-      {
-        player->detach(hitSmartSprite);
-        it = smartSprites.erase(it);
-
-        delete hitSmartSprite;
-      }
+      SmartSprite* deadSmartSprite = *it;
+      player->detach(deadSmartSprite);
+      it = smartSprites.erase(it);
+      delete deadSmartSprite;
     }
     else
       ++it;
@@ -355,16 +317,15 @@ bool Engine::play()
     }
     ticks = clock.getElapsedTicks();
     keystate = SDL_GetKeyboardState(NULL);
-    if(ticks > 0)
-    {
+    if ( ticks > 0 ) {
       clock.incrFrame();
-      if(keystate[SDL_SCANCODE_A] && !keystate[SDL_SCANCODE_D])
+      if (keystate[SDL_SCANCODE_A] && !keystate[SDL_SCANCODE_D])
         static_cast<Player*>(player)->moveLeft();
-      if(keystate[SDL_SCANCODE_D] && !keystate[SDL_SCANCODE_A])
+      if (keystate[SDL_SCANCODE_D] && !keystate[SDL_SCANCODE_A])
         static_cast<Player*>(player)->moveRight();
-      if(keystate[SDL_SCANCODE_W] && !keystate[SDL_SCANCODE_S])
+      if (keystate[SDL_SCANCODE_W] && !keystate[SDL_SCANCODE_S])
         static_cast<Player*>(player)->moveUp();
-      if(keystate[SDL_SCANCODE_S] && !keystate[SDL_SCANCODE_W])
+      if (keystate[SDL_SCANCODE_S] && !keystate[SDL_SCANCODE_W])
         static_cast<Player*>(player)->moveDown();
       draw();
       update(ticks);

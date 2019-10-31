@@ -51,9 +51,7 @@ SmartSprite::SmartSprite(const std::string& name, const Player* p) :
   collided(false),
   colliding(false),
   explosion(nullptr),
-  explosionInterval(GameData::getInstance().getXmlFloat(name+"/explosionInterval")),
-  timeSinceLastCollide(0),
-  numLives(GameData::getInstance().getXmlInt(name+"/lives")),
+  explosionStartTime(-1),
   imageWidth(GameData::getInstance().getXmlInt(name+"/imageWidth")),
   imageHeight(GameData::getInstance().getXmlInt(name+"/imageHeight")),
   scale(GameData::getInstance().getXmlInt(name+"/scale")),
@@ -61,6 +59,13 @@ SmartSprite::SmartSprite(const std::string& name, const Player* p) :
 
 void SmartSprite::randomizeVelocity()
 {
+  /*float vx = getVelocityX();
+  float vy = getVelocityY();
+  float newvx = GameData::getInstance().getRandFloat(vx, vx+70);
+  float newvy = GameData::getInstance().getRandFloat(vy, vy+70);
+  newvx *= [](){ if(rand()%2) return -1; else return 1; }();
+  newvy *= [](){ if(rand()%2) return -1; else return 1; }();
+  setVelocity(Vector2f(newvx, newvy));*/
   setVelocity(getVelocity());
 }
 
@@ -126,16 +131,14 @@ void SmartSprite::draw() const
 
 void SmartSprite::update(Uint32 ticks)
 {
-  if(collided && colliding)
+  if(colliding)
   {
-    timeSinceLastCollide += ticks;
     explosion->update(ticks);
-    if(timeSinceLastCollide > explosionInterval)
+    if((Clock::getInstance().getSeconds() - explosionStartTime) >= 0.75)
     {
       colliding = false;
       delete explosion;
       explosion = NULL;
-      timeSinceLastCollide = 0;
     }
     return;
   }
@@ -151,7 +154,7 @@ void SmartSprite::update(Uint32 ticks)
     if(currentMode == EVADE)
     {
       if(distanceToEnemy > safeDistance)
-        currentMode = ATTACK;
+      currentMode = ATTACK;
       else
       {
         if(x < ex)
@@ -174,7 +177,6 @@ void SmartSprite::update(Uint32 ticks)
         setVelocityY(-std::abs(getVelocityY()));
       if(getY()-imageHeight+imageHeight*scale < getPlayerPos()[1])
         setVelocityY(std::abs(getVelocityY()));
-
     }
   }
 }
@@ -190,5 +192,7 @@ void SmartSprite::collide()
   explosion->setPosition(getPosition());
   explosion->setVelocityX(0);
   explosion->setVelocityY(0);
-  //explosionStartTime = Clock::getInstance().getSeconds();
+  setPosition(Vector2f(-100, -100));
+  setVelocity(Vector2f(0, 0));
+  explosionStartTime = Clock::getInstance().getSeconds();
 }

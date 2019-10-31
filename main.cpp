@@ -2,7 +2,7 @@
   #include <time.h>
 
   int main(int, char*[])
-{
+  {
   srand(time(NULL));
   bool keepPlaying = true;
   try
@@ -21,4 +21,4 @@
     std::cout << "Oops, someone threw an exception!" << std::endl;
   }
   return 0;
-}
+  }

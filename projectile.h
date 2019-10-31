@@ -1,6 +1,3 @@
-#ifndef PROJECTILE_H
-#define PROJECTILE_H
-
 #include "drawable.h"
 #include "sprite.h"
 #include "gameData.h"
@@ -39,5 +36,3 @@ class Projectile : public Sprite
       distance = 0;
     }
 };
-
-#endif

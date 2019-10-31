@@ -12,7 +12,7 @@ class BuyMenuEngine
     BuyMenu menu;
     int optionChoice;
 
-    void draw() const;
+    void draw(Player*) const;
     void update(Uint32);
 
   public:

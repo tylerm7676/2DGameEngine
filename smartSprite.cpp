@@ -54,7 +54,9 @@ SmartSprite::SmartSprite(const std::string& name, const Player* p) :
   explosionInterval(GameData::getInstance().getXmlFloat(name+"/explosionInterval")),
   timeSinceLastCollide(0),
   numLives(GameData::getInstance().getXmlInt(name+"/lives")),
-  livesLeft(GameData::getInstance().getXmlInt(name+"/lives")),
+  imageWidth(GameData::getInstance().getXmlInt(name+"/imageWidth")),
+  imageHeight(GameData::getInstance().getXmlInt(name+"/imageHeight")),
+  scale(GameData::getInstance().getXmlInt(name+"/scale")),
   sound() {}
 
 void SmartSprite::randomizeVelocity()
@@ -164,33 +166,13 @@ void SmartSprite::update(Uint32 ticks)
     }
     else if(currentMode == ATTACK)
     {
-      if(getX() > getPlayerPos()[0] && abs(getX() - getPlayerPos()[0]) <= 10)
-      {
+      if(getX()-imageWidth+imageWidth*scale > getPlayerPos()[0])
         setVelocityX(-std::abs(getVelocityX()));
-        return;
-      }
-      if(getX() > getPlayerPos()[0])
-        setVelocityX(-std::abs(getVelocityX()));
-      if(getX() < getPlayerPos()[0] && abs(getX() - getPlayerPos()[0]) <= 10)
-      {
+      if(getX()-imageWidth+imageWidth*scale < getPlayerPos()[0])
         setVelocityX(std::abs(getVelocityX()));
-        return;
-      }
-      if(getX() < getPlayerPos()[0])
-        setVelocityX(std::abs(getVelocityX()));
-      if(getY() > getPlayerPos()[1] && abs(getY() - getPlayerPos()[1]) <= 10)
-      {
+      if(getY()-imageHeight+imageHeight*scale > getPlayerPos()[1])
         setVelocityY(-std::abs(getVelocityY()));
-        return;
-      }
-      if(getY() > getPlayerPos()[1])
-        setVelocityY(-std::abs(getVelocityY()));
-      if(getY() > getPlayerPos()[1] && abs(getY() - getPlayerPos()[1]) <= 10)
-      {
-        setVelocityY(std::abs(getVelocityY()));
-        return;
-      }
-      if(getY() < getPlayerPos()[1])
+      if(getY()-imageHeight+imageHeight*scale < getPlayerPos()[1])
         setVelocityY(std::abs(getVelocityY()));
 
     }

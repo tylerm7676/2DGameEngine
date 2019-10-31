@@ -27,51 +27,61 @@
   <total>5</total>
   <slowNum>5</slowNum>
   <fastNum>0</fastNum>
+  <tankNum>0</tankNum>
 </wave1>
 <wave2>
   <total>10</total>
   <slowNum>10</slowNum>
   <fastNum>0</fastNum>
+  <tankNum>0</tankNum>
 </wave2>
 <wave3>
   <total>15</total>
   <slowNum>15</slowNum>
   <fastNum>0</fastNum>
+  <tankNum>0</tankNum>
 </wave3>
 <wave4>
-  <total>20</total>
+  <total>25</total>
   <slowNum>20</slowNum>
-  <fastNum>0</fastNum>
+  <fastNum>5</fastNum>
+  <tankNum>0</tankNum>
 </wave4>
 <wave5>
   <total>30</total>
-  <slowNum>25</slowNum>
-  <fastNum>5</fastNum>
+  <slowNum>20</slowNum>
+  <fastNum>10</fastNum>
+  <tankNum>0</tankNum>
 </wave5>
 <wave6>
-  <total>40</total>
-  <slowNum>30</slowNum>
-  <fastNum>10</fastNum>
+  <total>35</total>
+  <slowNum>20</slowNum>
+  <fastNum>15</fastNum>
+  <tankNum>0</tankNum>
 </wave6>
 <wave7>
-  <total>50</total>
-  <slowNum>35</slowNum>
-  <fastNum>15</fastNum>
+  <total>45</total>
+  <slowNum>25</slowNum>
+  <fastNum>20</fastNum>
+  <tankNum>0</tankNum>
 </wave7>
 <wave8>
-  <total>60</total>
-  <slowNum>40</slowNum>
+  <total>50</total>
+  <slowNum>30</slowNum>
   <fastNum>20</fastNum>
+  <tankNum>0</tankNum>
 </wave8>
 <wave9>
-  <total>70</total>
-  <slowNum>45</slowNum>
-  <fastNum>25</fastNum>
+  <total>55</total>
+  <slowNum>35</slowNum>
+  <fastNum>20</fastNum>
+  <tankNum>0</tankNum>
 </wave9>
 <wave10>
-  <total>80</total>
-  <slowNum>50</slowNum>
-  <fastNum>30</fastNum>
+  <total>60</total>
+  <slowNum>35</slowNum>
+  <fastNum>25</fastNum>
+  <tankNum>0</tankNum>
 </wave10>
 
 <Cowboy>
@@ -98,7 +108,7 @@
 
 <Zombie>
   <file>assets/Zombie.png</file>
-  <lives>2</lives>
+  <lives>1</lives>
   <startPos x="640" y="-100"/>
   <velocity x="80" y="80"/>
   <minBound x="0" y="0"/>
@@ -115,7 +125,7 @@
   <imageHeight>62</imageHeight>
   <scale>1</scale>
   <slowDownFactor>0.30</slowDownFactor>
-  <safeDistance>200</safeDistance>
+  <safeDistance>300</safeDistance>
   <transparency>false</transparency>
 </Zombie>
 
@@ -123,7 +133,7 @@
   <file>assets/Zombie.png</file>
   <lives>1</lives>
   <startPos x="640" y="-100"/>
-  <velocity x="130" y="130"/>
+  <velocity x="140" y="140"/>
   <minBound x="0" y="0"/>
   <maxBound x="1920" y="1080"/>
   <frames>16</frames>
@@ -142,11 +152,11 @@
   <transparency>false</transparency>
 </FastZombie>
 
-<Boss>
+<Tank>
   <file>assets/Zombie.png</file>
-  <lives>100</lives>
+  <lives>5</lives>
   <startPos x="640" y="-100"/>
-  <velocity x="110" y="110"/>
+  <velocity x="60" y="60"/>
   <minBound x="0" y="0"/>
   <maxBound x="1920" y="1080"/>
   <frames>16</frames>
@@ -159,9 +169,32 @@
   <twoWay>true</twoWay>
   <imageWidth>62</imageWidth>
   <imageHeight>62</imageHeight>
-  <scale>4</scale>
+  <scale>2</scale>
   <slowDownFactor>0.30</slowDownFactor>
-  <safeDistance>100</safeDistance>
+  <safeDistance>300</safeDistance>
+  <transparency>false</transparency>
+</Tank>
+
+<Boss>
+  <file>assets/Zombie.png</file>
+  <lives>100</lives>
+  <startPos x="640" y="-100"/>
+  <velocity x="90" y="90"/>
+  <minBound x="0" y="0"/>
+  <maxBound x="1920" y="1080"/>
+  <frames>16</frames>
+  <leftFrames>4</leftFrames>
+  <rightFrames>4</rightFrames>
+  <upFrames>4</upFrames>
+  <downFrames>4</downFrames>
+  <frameInterval>200</frameInterval>
+  <explosionInterval>200</explosionInterval>
+  <twoWay>true</twoWay>
+  <imageWidth>62</imageWidth>
+  <imageHeight>62</imageHeight>
+  <scale>3</scale>
+  <slowDownFactor>0.30</slowDownFactor>
+  <safeDistance>400</safeDistance>
   <transparency>false</transparency>
 </Boss>
 

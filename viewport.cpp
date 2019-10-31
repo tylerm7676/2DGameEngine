@@ -25,18 +25,7 @@ void Viewport::setObjectToTrack(const Drawable *obj)
   objHeight = objectToTrack->getScaledHeight();
 }
 
-void Viewport::draw() const
-{
-  SDL_Color black = {static_cast<Uint8>(0), static_cast<Uint8>(0),
-    static_cast<Uint8>(0), static_cast<Uint8>(255)};
-  IoMod::getInstance().writeText("Tyler Murdock",
-    gdata.getXmlInt("text/name/locX")-1,
-    gdata.getXmlInt("text/name/locY")+1,
-    black);
-  IoMod::getInstance().writeText("Tyler Murdock",
-    gdata.getXmlInt("text/name/locX"),
-    gdata.getXmlInt("text/name/locY"));
-}
+void Viewport::draw() const {}
 
 void Viewport::update()
 {

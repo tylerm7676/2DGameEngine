@@ -15,9 +15,9 @@ BuyMenuEngine::BuyMenuEngine() :
   menu(renderer),
   optionChoice(-1) {}
 
-void BuyMenuEngine::draw() const
+void BuyMenuEngine::draw(Player* player) const
 {
-  menu.draw();
+  menu.draw(player);
   SDL_RenderPresent(renderer);
 }
 
@@ -61,8 +61,6 @@ void BuyMenuEngine::play(Player* player)
             else
             {
               std::cout << "Ammo purchased\n";
-              done = true;
-              break;
             }
           }
           if(optionChoice == 1)
@@ -75,8 +73,6 @@ void BuyMenuEngine::play(Player* player)
             else
             {
               std::cout << "Shotgun purchased\n";
-              done = true;
-              break;
             }
           }
           if(optionChoice == 2)
@@ -89,8 +85,6 @@ void BuyMenuEngine::play(Player* player)
             else
             {
               std::cout << "Ammo purchased\n";
-              done = true;
-              break;
             }
           }
           if(optionChoice == 3)
@@ -103,8 +97,6 @@ void BuyMenuEngine::play(Player* player)
             else
             {
               std::cout << "Assault Rifle purchased\n";
-              done = true;
-              break;
             }
           }
           if(optionChoice == 4)
@@ -117,8 +109,6 @@ void BuyMenuEngine::play(Player* player)
             else
             {
               std::cout << "Ammo purchased\n";
-              done = true;
-              break;
             }
           }
         }
@@ -128,6 +118,6 @@ void BuyMenuEngine::play(Player* player)
         menu.lightOff();
     }
     // In this section of the event loop we allow key bounce:
-    draw();
+    draw(player);
   }
 }

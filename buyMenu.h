@@ -5,6 +5,7 @@
 #include "clock.h"
 #include "ioMod.h"
 #include "sprite.h"
+#include "player.h"
 
 class BuyMenu
 {
@@ -33,7 +34,7 @@ class BuyMenu
     BuyMenu(SDL_Renderer*);
     BuyMenu(const BuyMenu&) = delete;
     BuyMenu& operator=(const BuyMenu&) = delete;
-    void draw() const;
+    void draw(Player*) const;
     void update();
     void incrIcon();
     void decrIcon();

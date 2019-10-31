@@ -20,7 +20,9 @@ class SmartSprite : public Drawable
     float explosionInterval;
     float timeSinceLastCollide;
     int numLives;
-    int livesLeft;
+    int imageWidth;
+    int imageHeight;
+    int scale;
     Sound sound;
     static int randomPos;
 
@@ -63,6 +65,6 @@ class SmartSprite : public Drawable
     }
     void randomizeVelocity();
     void randomizePosition();
-    void loseLife() { livesLeft--; }
-    int getNumLives() { return livesLeft; }
+    void loseLife() { numLives--; }
+    int getNumLives() { return numLives; }
 };

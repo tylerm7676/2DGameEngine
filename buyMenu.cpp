@@ -85,20 +85,34 @@ void BuyMenu::drawBackground() const
 
 }
 
-void BuyMenu::draw() const
+void BuyMenu::draw(Player* player) const
 {
   drawBackground();
   io.writeText("Buy Weapons", hudFrame.x + 260, hudFrame.y + 125, true);
+  io.writeText("$"+std::to_string(player->getMoney()), 200, 315);
+  io.writeText("Pistol Ammo: " + std::to_string(player->getPistolAmmoInClip())
+    + "/" + std::to_string(player->getPistolAmmoTotal()), 200, 380);
+  if(player->isShotgunPurchased())
+  {
+    io.writeText("Shotgun Ammo: " + std::to_string(player->getShotgunAmmoInClip())
+      + "/" + std::to_string(player->getShotgunAmmoTotal()), 200, 395);
+  }
+  if(player->isAssaultRiflePurchased())
+  {
+    io.writeText("Assault Rifle Ammo: " + std::to_string(player->getAssaultRifleAmmoInClip())
+      + "/" + std::to_string(player->getAssaultRifleAmmoTotal()), 200, 410);
+  }
+
   int yLoc = 250;
-  io.writeText("$100 - Purchase Pistol Ammo", 600, yLoc + spaces);
+  io.writeText("$100 - Pistol Ammo 70x", 600, yLoc + spaces);
   yLoc += spaces;
-  io.writeText("$500 - Purchase Shotgun", 600, yLoc + spaces);
+  io.writeText("$500 - Shotgun", 600, yLoc + spaces);
   yLoc += spaces;
-  io.writeText("$200 - Purchase Shotgun Ammo", 600, yLoc + spaces);
+  io.writeText("$200 - Shotgun Ammo 50x", 600, yLoc + spaces);
   yLoc += spaces;
   io.writeText("$1000 - Purchase Assault Rifle", 600, yLoc + spaces);
   yLoc += spaces;
-  io.writeText("$500 - Purchase Assault Rifle Ammo", 600, yLoc + spaces);
+  io.writeText("$500 - Assault Rifle Ammo 300 x", 600, yLoc + spaces);
 
   // We have to draw the clickOn & clickOff relative to the screen,
   // and we don't want to offset by the location of the viewprot:

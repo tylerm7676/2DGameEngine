@@ -110,9 +110,17 @@ class Player : public Drawable
     int getMoney() { return money; }
     int getPoints() { return points; }
     bool purchasePistolAmmo();
+    int getPistolAmmoInClip() const { return pistolClip; }
+    int getPistolAmmoTotal() const { return pistolAmmoTotal; }
     bool purchaseShotgun();
+    bool isShotgunPurchased() const { return shotgunPurchased; }
+    int getShotgunAmmoInClip() const { return shotgunClip; }
+    int getShotgunAmmoTotal() const { return shotgunAmmoTotal; }
     bool purchaseShotgunAmmo();
     bool purchaseAssaultRifle();
+    bool isAssaultRiflePurchased() const { return assaultRiflePurchased; }
+    int getAssaultRifleAmmoInClip() const { return assaultRifleClip; }
+    int getAssaultRifleAmmoTotal() const { return assaultRifleAmmoTotal; }
     bool purchaseAssaultRifleAmmo();
 };
 

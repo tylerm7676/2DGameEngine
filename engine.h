@@ -34,7 +34,6 @@ class Engine
     std::vector<SmartSprite*> smartSprites;
     CollisionStrategy* collisionStrategy;
     MenuEngine menuEngine;
-    int numZombies;
     int waveNum, wave1, wave1Slow, wave1Fast, wave2, wave2Slow, wave2Fast,
     wave3, wave3Slow, wave3Fast, wave4, wave4Slow, wave4Fast, wave5, wave5Slow,
     wave5Fast, wave6, wave6Slow, wave6Fast, wave7, wave7Slow, wave7Fast, wave8,

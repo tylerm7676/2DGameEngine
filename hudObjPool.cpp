@@ -50,13 +50,12 @@ void HudObjPool::draw(int numZombiesLeft, int wave, int bulletsRemain,
     SDL_RenderDrawRect(renderer, &r);
 
     std::string textToWrite;
-    textToWrite += "        OBJECT POOL";
-    textToWrite += "\n Wave: " + std::to_string(wave);
+    textToWrite += " Wave: " + std::to_string(wave);
     textToWrite += "\n Zombies Remaining: " + std::to_string(numZombiesLeft);
     textToWrite += "\n " + std::to_string(bulletsRemain) + " / ";
     textToWrite += std::to_string(bulletsClip);
     textToWrite += "\n Money: " + std::to_string(money);
-    textToWrite += "\n Points: " + std::to_string(points);
+    textToWrite += "     Points: " + std::to_string(points);
 
     IoMod::getInstance().writeTextWrapped(textToWrite, pos[0]+5, pos[1]+5,
       width);

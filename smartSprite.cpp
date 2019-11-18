@@ -59,14 +59,14 @@ SmartSprite::SmartSprite(const std::string& name, const Player* p) :
 
 void SmartSprite::randomizeVelocity()
 {
-  /*float vx = getVelocityX();
+  float vx = getVelocityX();
   float vy = getVelocityY();
   float newvx = GameData::getInstance().getRandFloat(vx, vx+70);
   float newvy = GameData::getInstance().getRandFloat(vy, vy+70);
   newvx *= [](){ if(rand()%2) return -1; else return 1; }();
   newvy *= [](){ if(rand()%2) return -1; else return 1; }();
-  setVelocity(Vector2f(newvx, newvy));*/
-  setVelocity(getVelocity());
+  setVelocity(Vector2f(newvx, newvy));
+  //setVelocity(getVelocity());
 }
 
 void SmartSprite::randomizePosition()

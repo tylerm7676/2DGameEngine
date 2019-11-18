@@ -74,7 +74,7 @@ void GameOver::draw(bool won)
       textToWrite += "\n\n\n   __________________________";
       textToWrite +=   "\n\n                  You Win!";
       textToWrite +=     "\n   __________________________";
-      textToWrite += "\n\n\n          Press R to play again";
+      textToWrite += "\n\n\n          Press P to play again";
       IoMod::getInstance().writeTextWrappedBold(textToWrite, pos[0]+5, pos[1]+5, width, winTextColor);
     }
     else
@@ -86,7 +86,7 @@ void GameOver::draw(bool won)
       textToWrite += "\n\n\n   __________________________";
       textToWrite +=   "\n\n                 You Lose!";
       textToWrite +=     "\n   __________________________";
-      textToWrite += "\n\n\n          Press R to try again";
+      textToWrite += "\n\n\n          Press P to try again";
       IoMod::getInstance().writeTextWrappedBold(textToWrite, pos[0]+5, pos[1]+5, width, loseTextColor);
     }
   }

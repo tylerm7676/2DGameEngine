@@ -304,7 +304,7 @@ bool Engine::play()
           player->setReload();
         if(keystate[SDL_SCANCODE_M])
           sound.toggleMusic();
-        if(keystate[SDL_SCANCODE_J])
+        if(keystate[SDL_SCANCODE_P])
         {
           healthBar.reset();
           healthBar.setVisibility(false);

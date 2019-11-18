@@ -319,8 +319,8 @@ void Player::detach(SmartSprite* o)
     if (*ptr == o)
     {
       ptr = observers.erase(ptr);
-      money += 10;
-      points += 10;
+      money += 8;
+      points += 8;
       return;
     }
     ++ptr;

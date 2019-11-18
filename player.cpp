@@ -57,6 +57,7 @@ void Player::advanceFrame(Uint32 ticks)
 
 void Player::reload()
 {
+  sound[3];
   if(pistol && pistolAmmoTotal > 0)
   {
     if((pistolAmmoTotal + pistolAmmoInClip) < pistolClip)

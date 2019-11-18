@@ -37,6 +37,7 @@ SDL_Sound::SDL_Sound() :
     sounds.push_back(Mix_LoadWAV("sounds/Splat.wav"));
     sounds.push_back(Mix_LoadWAV("sounds/9mm.wav"));
     sounds.push_back(Mix_LoadWAV("sounds/12Gauge.wav"));
+    sounds.push_back(Mix_LoadWAV("sounds/garand_reload_clipin.wav"));
     for(unsigned int i = 0; i < sounds.size(); ++i)
       channels.push_back(i);
   }

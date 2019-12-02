@@ -78,10 +78,11 @@
   <tankNum>0</tankNum>
 </wave9>
 <wave10>
-  <total>65</total>
-  <slowNum>35</slowNum>
-  <fastNum>25</fastNum>
+  <total>6</total>
+  <slowNum>0</slowNum>
+  <fastNum>0</fastNum>
   <tankNum>0</tankNum>
+  <bossNum>150</bossNum>
 </wave10>
 
 <Cowboy>
@@ -109,8 +110,8 @@
 <Zombie>
   <file>assets/Zombie.png</file>
   <lives>1</lives>
-  <startPos x="640" y="-100"/>
-  <velocity x="70" y="70"/>
+  <startPos x="640" y="-100"/>>
+  <velocity x="100" y="100"/>
   <minBound x="0" y="0"/>
   <maxBound x="1920" y="1080"/>
   <frames>16</frames>
@@ -125,15 +126,15 @@
   <imageHeight>62</imageHeight>
   <scale>1</scale>
   <slowDownFactor>0.30</slowDownFactor>
-  <safeDistance>300</safeDistance>
+  <safeDistance>200</safeDistance>
   <transparency>false</transparency>
 </Zombie>
 
-<Boss>
+<FastZombie>
   <file>assets/Zombie.png</file>
-  <lives>100</lives>
+  <lives>1</lives>
   <startPos x="640" y="-100"/>
-  <velocity x="90" y="90"/>
+  <velocity x="140" y="140"/>
   <minBound x="0" y="0"/>
   <maxBound x="1920" y="1080"/>
   <frames>16</frames>
@@ -146,7 +147,53 @@
   <twoWay>true</twoWay>
   <imageWidth>62</imageWidth>
   <imageHeight>62</imageHeight>
-  <scale>3</scale>
+  <scale>1</scale>
+  <slowDownFactor>0.30</slowDownFactor>
+  <safeDistance>300</safeDistance>
+  <transparency>false</transparency>
+</FastZombie>
+
+<Tank>
+  <file>assets/Zombie.png</file>
+  <lives>5</lives>
+  <startPos x="640" y="-100"/>
+  <velocity x="60" y="60"/>
+  <minBound x="0" y="0"/>
+  <maxBound x="1920" y="1080"/>
+  <frames>16</frames>
+  <leftFrames>4</leftFrames>
+  <rightFrames>4</rightFrames>
+  <upFrames>4</upFrames>
+  <downFrames>4</downFrames>
+  <frameInterval>200</frameInterval>
+  <explosionInterval>200</explosionInterval>
+  <twoWay>true</twoWay>
+  <imageWidth>62</imageWidth>
+  <imageHeight>62</imageHeight>
+  <scale>2</scale>
+  <slowDownFactor>0.30</slowDownFactor>
+  <safeDistance>300</safeDistance>
+  <transparency>false</transparency>
+</Tank>
+
+<Boss>
+  <file>assets/Boss.png</file>
+  <lives>100</lives>
+  <startPos x="640" y="-100"/>
+  <velocity x="90" y="90"/>
+  <minBound x="0" y="0"/>
+  <maxBound x="1920" y="1080"/>
+  <frames>8</frames>
+  <leftFrames>2</leftFrames>
+  <rightFrames>2</rightFrames>
+  <upFrames>2</upFrames>
+  <downFrames>2</downFrames>
+  <frameInterval>100</frameInterval>
+  <explosionInterval>200</explosionInterval>
+  <twoWay>true</twoWay>
+  <imageWidth>62</imageWidth>
+  <imageHeight>69</imageHeight>
+  <scale>1.5</scale>
   <slowDownFactor>0.30</slowDownFactor>
   <safeDistance>400</safeDistance>
   <transparency>false</transparency>

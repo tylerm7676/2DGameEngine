@@ -95,12 +95,12 @@ void BuyMenu::draw(Player* player) const
   if(player->isShotgunPurchased())
   {
     io.writeText("Shotgun Ammo: " + std::to_string(player->getShotgunAmmoInClip())
-      + "/" + std::to_string(player->getShotgunAmmoTotal()), 200, 395);
+      + "/" + std::to_string(player->getShotgunAmmoTotal()), 200, 415);
   }
   if(player->isAssaultRiflePurchased())
   {
     io.writeText("Assault Rifle Ammo: " + std::to_string(player->getAssaultRifleAmmoInClip())
-      + "/" + std::to_string(player->getAssaultRifleAmmoTotal()), 200, 410);
+      + "/" + std::to_string(player->getAssaultRifleAmmoTotal()), 200, 450);
   }
 
   int yLoc = 250;

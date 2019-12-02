@@ -196,6 +196,7 @@ void SmartSprite::collide()
     explosion->setPosition(getPosition());
     explosion->setVelocityX(0);
     explosion->setVelocityY(0);
+    setVelocity(Vector2f(120, 120));
   }
   else
   {

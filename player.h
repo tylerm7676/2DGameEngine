@@ -28,7 +28,6 @@ class Player : public Drawable
     std::list<Projectile*> freeProjectiles;
     unsigned int numLives;
     unsigned int livesLeft;
-    bool godMode;
     float minSpeed;
     float pistolInterval;
     float shotgunInterval;
@@ -98,8 +97,6 @@ class Player : public Drawable
     bool isColliding() const { return colliding; }
     void setCollided(bool b) { collided = b; }
     void loseLife() { --livesLeft; }
-    bool isGodMode() const { return godMode; }
-    void toggleGodMode() { godMode = !godMode; }
     void cycleLeft();
     void cycleRight();
     std::string getWeapon();

@@ -92,7 +92,7 @@ void Menu::getControlEventLoop() const
   bool done = false;
   drawBackground();
   std::string inNumber = " ";
-  std::string msg = "Press return/esc when finished.";
+  std::string msg = "Press return/esc to close this window.";
   while(!done)
   {
     // The next loop polls for events, guarding against key bounce:
@@ -112,14 +112,14 @@ void Menu::getControlEventLoop() const
       drawBackground();
       io.writeText("Kill All Zombies to Win!", hudFrame.x + 540, hudFrame.y + 140);
       io.writeText("There are 10 waves of Zombies with increasing difficulty",
-        hudFrame.x + 290, hudFrame.y + 240);
-      io.writeText(msg, hudFrame.x + 500, hudFrame.y + 280);
+        hudFrame.x + 380, hudFrame.y + 240);
+      io.writeText(msg, hudFrame.x + 470, hudFrame.y + 280);
       io.writeText(inNumber, hudFrame.x + 620, hudFrame.y + 340);
       io.writeText("Controls:", hudFrame.x + 600, hudFrame.y + 400);
       io.writeText("W: Up, A: Left, S: Down, D: Right, Space: Shoot Weapons, ESC: Pause/Buy Weapons, R: Reload, F1: Toggle HUDs",
       hudFrame.x + 100, hudFrame.y + 440);
       io.writeText("M: Toggle Music, Q or E: Cycle Weapons, Player must be facing a certain direction to shoot in that direction",
-      hudFrame.x + 100, hudFrame.y + 480);
+      hudFrame.x + 130, hudFrame.y + 480);
       SDL_RenderPresent(renderer);
     }
   }
@@ -133,8 +133,12 @@ void Menu::draw(int wave) const
   if(wave == 0)
     io.writeText("Zombies Menu", hudFrame.x + 250, hudFrame.y + 125, true);
   else
-    io.writeText("Wave " + std::to_string(wave), hudFrame.x + 425, hudFrame.y + 125, true);
-
+  {
+    if(wave != 11)
+      io.writeText("Wave " + std::to_string(wave), hudFrame.x + 405, hudFrame.y + 125, true);
+    else
+      io.writeText("Wave Boss", hudFrame.x + 315, hudFrame.y + 125, true);
+  }
   int yLoc = 225;
   io.writeText("Start", 640, yLoc + spaces);
   yLoc += spaces;

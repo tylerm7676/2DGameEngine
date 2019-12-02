@@ -34,18 +34,17 @@ Engine::Engine() :
   smartSprites(),
   collisionStrategy(new PerPixelCollisionStrategy),
   menuEngine(),
-  numZombies(50),
-  waveNum(8),
-  wave1(GameData::getInstance().getXmlInt("wave1/total")),
-  wave2(GameData::getInstance().getXmlInt("wave2/total")),
-  wave3(GameData::getInstance().getXmlInt("wave3/total")),
-  wave4(GameData::getInstance().getXmlInt("wave4/total")),
-  wave5(GameData::getInstance().getXmlInt("wave5/total")),
-  wave6(GameData::getInstance().getXmlInt("wave6/total")),
-  wave7(GameData::getInstance().getXmlInt("wave7/total")),
-  wave8(GameData::getInstance().getXmlInt("wave8/total")),
-  wave9(GameData::getInstance().getXmlInt("wave9/total")),
-  wave10(GameData::getInstance().getXmlInt("wave10/total")),
+  waveNum(0),
+  wave1(GameData::getInstance().getXmlInt("wave1")),
+  wave2(GameData::getInstance().getXmlInt("wave2")),
+  wave3(GameData::getInstance().getXmlInt("wave3")),
+  wave4(GameData::getInstance().getXmlInt("wave4")),
+  wave5(GameData::getInstance().getXmlInt("wave5")),
+  wave6(GameData::getInstance().getXmlInt("wave6")),
+  wave7(GameData::getInstance().getXmlInt("wave7")),
+  wave8(GameData::getInstance().getXmlInt("wave8")),
+  wave9(GameData::getInstance().getXmlInt("wave9")),
+  wave10(GameData::getInstance().getXmlInt("wave10")),
   lights()
   {
     menuEngine.play(waveNum, player);
@@ -217,13 +216,13 @@ void Engine::draw()
     smartSprites.back()->randomizePosition();
     player->attach(smartSprites[0]);
   }
-  else if(smartSprites.size() <= 0 && waveNum == 10)
+  else if(smartSprites.size() <= 0 && waveNum == 11)
   {
-    clock.pause();
     healthBar.setVisibility(false);
     hudObjPool.setVisibility(false);
     gameOver.setVisibility(true);
     gameOver.draw(true);
+    clock.pause();
   }
   SDL_RenderPresent(renderer);
 }
@@ -278,8 +277,7 @@ void Engine::checkForCollisions()
           return;
         }
         hitSmartSprite->setCollided(false);
-        hitSmartSprite->randomizeVelocity();
-        hitSmartSprite->setVelocity(Vector2f(80, 80));
+        hitSmartSprite->setVelocity(Vector2f(120, 120));
       }
       else
       {
@@ -341,13 +339,11 @@ bool Engine::play()
           clock.unpause();
           return true;
         }
-        if(keystate[SDL_SCANCODE_G])
-          player->toggleGodMode();
       }
     }
     ticks = clock.getElapsedTicks();
     keystate = SDL_GetKeyboardState(NULL);
-    if ( ticks > 0 ) {
+    if(ticks > 0) {
       clock.incrFrame();
       if (keystate[SDL_SCANCODE_A] && !keystate[SDL_SCANCODE_D])
         static_cast<Player*>(player)->moveLeft();

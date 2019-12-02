@@ -120,17 +120,11 @@ void Player::reload()
 void Player::setReload()
 {
   if(pistol && !pistolIsReloading && pistolAmmoInClip < pistolClip && pistolAmmoTotal > 0)
-  {
     pistolIsReloading = true;
-  }
   if(shotgun && !shotgunIsReloading && shotgunAmmoInClip < shotgunClip && shotgunAmmoTotal > 0)
-  {
     shotgunIsReloading = true;
-  }
   if(assaultRifle && !assaultRifleIsReloading && assaultRifleAmmoInClip < assaultRifleClip && assaultRifleAmmoTotal > 0)
-  {
     assaultRifleIsReloading = true;
-  }
 }
 
 Player::Player(const std::string& name) :
@@ -149,7 +143,6 @@ Player::Player(const std::string& name) :
   freeProjectiles(),
   numLives(GameData::getInstance().getXmlInt(name+"/lives")),
   livesLeft(GameData::getInstance().getXmlInt(name+"/lives")),
-  godMode(false),
   minSpeed(GameData::getInstance().getXmlInt(projectileName+"/minSpeed")),
   pistolInterval(GameData::getInstance().getXmlInt(projectileName+"/pistolInterval")),
   shotgunInterval(GameData::getInstance().getXmlInt(projectileName+"/shotgunInterval")),
@@ -290,23 +283,20 @@ void Player::update(Uint32 ticks)
 
 void Player::collide()
 {
-  if(!godMode)
+  sound[0];
+  auto it = observers.begin();
+  while(it != observers.end())
   {
-    sound[0];
-    auto it = observers.begin();
-    while(it != observers.end())
-    {
-      (*it)->switchMode();
-      ++it;
-    }
-    collided = true;
-    colliding = true;
-    explosion = new Sprite("Explosion");
-    explosion->setPosition(getPosition());
-    explosion->setVelocityX(0);
-    explosion->setVelocityY(0);
-    explosionStartTime = Clock::getInstance().getSeconds();
+    (*it)->switchMode();
+    ++it;
   }
+  collided = true;
+  colliding = true;
+  explosion = new Sprite("Explosion");
+  explosion->setPosition(getPosition());
+  explosion->setVelocityX(0);
+  explosion->setVelocityY(0);
+  explosionStartTime = Clock::getInstance().getSeconds();
 }
 
 void Player::attach(SmartSprite* o) { observers.push_back(o); }
@@ -437,7 +427,7 @@ void Player::shoot()
         }
         if(getVelocityY() > 0 || facing == UP)
         {
-          p->setPosition(getPosition()+Vector2f(x/3,y));
+          p->setPosition(getPosition()+Vector2f(x/3, y));
           p->setStartingPos(p->getPosition());
           p->setVelocity(getVelocity() + Vector2f(0, -minSpeed));
         }

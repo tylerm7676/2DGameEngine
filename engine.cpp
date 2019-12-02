@@ -193,13 +193,14 @@ void Engine::draw()
   }
   else if(smartSprites.size() <= 0 && waveNum == 9)
   {
+    // Testing to see if seg fault comes from the vector
     waveNum++;
     clock.pause();
     menuEngine.play(waveNum, player);
     clock.unpause();
     for(int i = 0; i < wave10; i++)
     {
-      smartSprites.push_back(new SmartSprite("Zombie", player));
+      smartSprites.push_back(new SmartSprite("Boss", player));
       smartSprites.back()->randomizeVelocity();
       smartSprites.back()->randomizePosition();
       player->attach(smartSprites[i]);
@@ -304,7 +305,7 @@ bool Engine::play()
           player->setReload();
         if(keystate[SDL_SCANCODE_M])
           sound.toggleMusic();
-        if(keystate[SDL_SCANCODE_P])
+        if(keystate[SDL_SCANCODE_J])
         {
           healthBar.reset();
           healthBar.setVisibility(false);

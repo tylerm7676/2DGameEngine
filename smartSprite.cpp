@@ -55,6 +55,8 @@ SmartSprite::SmartSprite(const std::string& name, const Player* p) :
   imageWidth(GameData::getInstance().getXmlInt(name+"/imageWidth")),
   imageHeight(GameData::getInstance().getXmlInt(name+"/imageHeight")),
   scale(GameData::getInstance().getXmlInt(name+"/scale")),
+  lives(GameData::getInstance().getXmlInt(name+"/lives")),
+  boss(false),
   sound() {}
 
 void SmartSprite::randomizeVelocity()
@@ -188,11 +190,21 @@ void SmartSprite::collide()
   colliding = true;
   setVelocityX(0);
   setVelocityY(0);
-  explosion = new Sprite("Explosion");
-  explosion->setPosition(getPosition());
-  explosion->setVelocityX(0);
-  explosion->setVelocityY(0);
-  setPosition(Vector2f(-100, -100));
-  setVelocity(Vector2f(0, 0));
+  if(boss)
+  {
+    explosion = new Sprite("Explosion");
+    explosion->setPosition(getPosition());
+    explosion->setVelocityX(0);
+    explosion->setVelocityY(0);
+  }
+  else
+  {
+    explosion = new Sprite("Explosion");
+    explosion->setPosition(getPosition());
+    explosion->setVelocityX(0);
+    explosion->setVelocityY(0);
+    setPosition(Vector2f(-100, -100));
+    setVelocity(Vector2f(0, 0));
+  }
   explosionStartTime = Clock::getInstance().getSeconds();
 }

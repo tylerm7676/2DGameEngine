@@ -35,7 +35,7 @@ Engine::Engine() :
   collisionStrategy(new PerPixelCollisionStrategy),
   menuEngine(),
   numZombies(50),
-  waveNum(0),
+  waveNum(8),
   wave1(GameData::getInstance().getXmlInt("wave1/total")),
   wave2(GameData::getInstance().getXmlInt("wave2/total")),
   wave3(GameData::getInstance().getXmlInt("wave3/total")),
@@ -193,18 +193,29 @@ void Engine::draw()
   }
   else if(smartSprites.size() <= 0 && waveNum == 9)
   {
-    // Testing to see if seg fault comes from the vector
     waveNum++;
     clock.pause();
     menuEngine.play(waveNum, player);
     clock.unpause();
     for(int i = 0; i < wave10; i++)
     {
-      smartSprites.push_back(new SmartSprite("Boss", player));
+      smartSprites.push_back(new SmartSprite("Zombie", player));
       smartSprites.back()->randomizeVelocity();
       smartSprites.back()->randomizePosition();
       player->attach(smartSprites[i]);
     }
+  }
+  else if(smartSprites.size() <= 0 && waveNum == 10)
+  {
+    waveNum++;
+    clock.pause();
+    menuEngine.play(waveNum, player);
+    clock.unpause();
+    smartSprites.push_back(new SmartSprite("Boss", player));
+    smartSprites[0]->setBoss();
+    smartSprites.back()->randomizeVelocity();
+    smartSprites.back()->randomizePosition();
+    player->attach(smartSprites[0]);
   }
   else if(smartSprites.size() <= 0 && waveNum == 10)
   {
@@ -255,10 +266,28 @@ void Engine::checkForCollisions()
     }
     if((*it)->hasCollided() && (!((*it)->isColliding())))
     {
-      SmartSprite* deadSmartSprite = *it;
-      player->detach(deadSmartSprite);
-      it = smartSprites.erase(it);
-      delete deadSmartSprite;
+      SmartSprite* hitSmartSprite = *it;
+      if(hitSmartSprite->isBoss())
+      {
+        hitSmartSprite->loseLife();
+        if(hitSmartSprite->getLives() <= 0)
+        {
+          player->detach(hitSmartSprite);
+          it = smartSprites.erase(it);
+          delete hitSmartSprite;
+          return;
+        }
+        hitSmartSprite->setCollided(false);
+        hitSmartSprite->randomizeVelocity();
+        hitSmartSprite->setVelocity(Vector2f(80, 80));
+      }
+      else
+      {
+        player->detach(hitSmartSprite);
+        it = smartSprites.erase(it);
+        delete hitSmartSprite;
+        return;
+      }
     }
     else
       ++it;
@@ -305,7 +334,7 @@ bool Engine::play()
           player->setReload();
         if(keystate[SDL_SCANCODE_M])
           sound.toggleMusic();
-        if(keystate[SDL_SCANCODE_J])
+        if(keystate[SDL_SCANCODE_P])
         {
           healthBar.reset();
           healthBar.setVisibility(false);

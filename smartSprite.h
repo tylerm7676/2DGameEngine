@@ -18,7 +18,8 @@ class SmartSprite : public Drawable
     bool colliding;
     Sprite* explosion;
     float explosionStartTime;
-    int imageWidth, imageHeight, scale;
+    int imageWidth, imageHeight, scale, lives;
+    bool boss;
     Sound sound;
     static int randomPos;
 
@@ -45,6 +46,8 @@ class SmartSprite : public Drawable
     Mode getCurrentMode() const { return currentMode; }
     bool hasCollided() const { return collided; }
     bool isColliding() const { return colliding; }
+    void setCollided(bool b) { collided = b; }
+    void setColliding(bool b) { colliding = b; }
 
     void setPlayerPos(const Vector2f& p) { playerPos = p; }
     void setPlayerWidth(int w) { playerWidth = w; }
@@ -59,4 +62,8 @@ class SmartSprite : public Drawable
     }
     void randomizeVelocity();
     void randomizePosition();
+    void loseLife() { lives--; }
+    int getLives() { return lives; }
+    bool isBoss() { return boss; }
+    void setBoss() { boss = true; }
 };

@@ -84,7 +84,7 @@ void Engine::draw()
     clock.pause();
     menuEngine.play(waveNum, player);
     clock.unpause();
-    for(int i; i < wave2; i++)
+    for(int i = 0; i < wave2; i++)
     {
       smartSprites.push_back(new SmartSprite("Zombie", player));
       smartSprites.back()->randomizeVelocity();
